@@ -1,3 +1,6 @@
+import Signup from '../Signup/page';
+import Link from 'next/link';
+
 export default function login(){
 
     return (
@@ -29,7 +32,9 @@ export default function login(){
                 </div>
                 <div className="text-sm flex justify-center space-x-1 items-center">
                   <p>Don't have an account?</p>
-                  <button className="bg-white hover:bg-stone-200 underline font-bold rounded-md text-blue-500 text-sm">Create Account</button>
+                  <div className="bg-white hover:bg-stone-200 underline font-bold rounded-md text-blue-500 text-sm">
+                    <Link href='/Signup'>Create an Account </Link>
+                  </div>
                 </div>
               </form>
             </div>
