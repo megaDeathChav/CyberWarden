@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import login from './login/page';
+import login from '../login/page';
 import { DataGrid } from '@mui/x-data-grid';
 
 
