@@ -115,6 +115,7 @@ const StyledSidebar = styled.aside<StyledSidebarProps>`
   border-right-width: 1px;
   border-right-style: solid;
   border-color: #efefef;
+  overflow-y: auto;
 
   transition: ${({ transitionDuration }) => `width, left, right, ${transitionDuration}ms`};
 
@@ -134,7 +135,7 @@ const StyledSidebar = styled.aside<StyledSidebarProps>`
     border-left-style: solid;
   }
 
-  &.${sidebarClasses.broken} {
+  &.${sidebarClasses} {
     position: fixed;
     height: 100%;
     top: 0px;
@@ -169,6 +170,7 @@ const StyledSidebar = styled.aside<StyledSidebarProps>`
 const StyledSidebarContainer = styled.div<StyledSidebarContainerProps>`
   position: relative;
   height: 100%;
+  max-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 3;
@@ -212,7 +214,6 @@ export const Sidebar = React.forwardRef<HTMLHtmlElement, SidebarProps>(
       onBreakPoint,
       width = '250px',
       collapsedWidth = '80px',
-      defaultCollapsed,
       className,
       children,
       breakPoint,
@@ -236,13 +237,7 @@ export const Sidebar = React.forwardRef<HTMLHtmlElement, SidebarProps>(
           return `(max-width: ${BREAK_POINTS[breakPoint]})`;
         }
 
-        if (breakPoint === 'always' || breakPoint === 'all') {
-          if (breakPoint === 'always') {
-            console.warn(
-              'The "always" breakPoint is deprecated and will be removed in future release. ' +
-                'Please use the "all" breakPoint instead.',
-            );
-          }
+        if (breakPoint === 'all') {
           return `screen`;
         }
 
@@ -263,7 +258,7 @@ export const Sidebar = React.forwardRef<HTMLHtmlElement, SidebarProps>(
     const legacySidebarContext = useLegacySidebar();
 
     const collapsedValue =
-      collapsed ?? (!mounted && defaultCollapsed ? true : legacySidebarContext?.collapsed);
+      collapsed ?? (!mounted ? true : legacySidebarContext?.collapsed);
     const toggledValue = toggled ?? legacySidebarContext?.toggled;
 
     const handleBackdropClick = () => {
@@ -286,13 +281,13 @@ export const Sidebar = React.forwardRef<HTMLHtmlElement, SidebarProps>(
     React.useEffect(() => {
       if (!mounted) {
         legacySidebarContext?.updateSidebarState({
-          collapsed: defaultCollapsed,
+          collapsed: collapsed,
         });
         setMounted(true);
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [defaultCollapsed, mounted, legacySidebarContext?.updateSidebarState]);
+    }, [collapsed, mounted, legacySidebarContext?.updateSidebarState]);
 
     return (
       <SidebarContext.Provider
@@ -342,7 +337,6 @@ export const Sidebar = React.forwardRef<HTMLHtmlElement, SidebarProps>(
               tabIndex={0}
               aria-label="backdrop"
               onClick={handleBackdropClick}
-              onKeyPress={handleBackdropClick}
               className={sidebarClasses.backdrop}
             />
           )}
