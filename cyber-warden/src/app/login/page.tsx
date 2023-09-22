@@ -1,4 +1,4 @@
-import Signup from '../Signup/page';
+import Signup from '../signup/page';
 import Link from 'next/link';
 
 export default function login(){
@@ -33,7 +33,7 @@ export default function login(){
                 <div className="text-sm flex justify-center space-x-1 items-center">
                   <p>Don't have an account?</p>
                   <div className="bg-white hover:bg-stone-200 underline font-bold rounded-md text-blue-500 text-sm">
-                    <Link href='/Signup'>Create an Account </Link>
+                    <Link href='/signup'>Create an Account </Link>
                   </div>
                 </div>
               </form>
