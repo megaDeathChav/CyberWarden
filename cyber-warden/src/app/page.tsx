@@ -28,6 +28,9 @@ import { menuClasses } from '@/utils/utilityClasses';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
+import BarGraph from '@/components/BarCharts';
+import PieGraph from '@/components/PieCharts';
+
 
 type Theme = 'light' | 'dark';
 
@@ -284,6 +287,10 @@ export default function Home() {
           <Link href='/login'>Login Here </Link>
         </div>
       </div>
+        <div style ={{display: "flex"}}> {/* temporary location */}
+          <BarGraph/>
+          <PieGraph/>
+        </div>
     </main>
   </div>
   )
