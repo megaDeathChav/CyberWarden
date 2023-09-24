@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import BarGraph from '@/components/BarCharts';
 import PieGraph from '@/components/PieCharts';
 
@@ -12,6 +13,7 @@ export default function Home() {
         <div style ={{display: "flex"}}> {/* temporary location */}
           {/* <BarGraph /> */}
           {/* <PieGraph /> */}
+          helllooooo
         </div>
     </main>
   </div>
