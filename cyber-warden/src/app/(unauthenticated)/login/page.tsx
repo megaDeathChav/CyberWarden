@@ -6,7 +6,7 @@ export default function login(){
     return (
         <main className= "bg-gradient-to-t from-sky-500 to-sky-950 flex flex-col min-h-screen items-center justify-center">
             <div className="max-w-md w-full mx-auto mt-4 bg-white rounded-2xl p-8 borde border-gray-300">
-              {/* Stylized text */}
+              {/* Stylized text **/}
               <div className="text-center mb-4">
                 <p className="text-3xl font-extrabold text-black">Login </p>
                 <p className="text-sm font-bold text-gray-600">to Cyberwarden</p>
