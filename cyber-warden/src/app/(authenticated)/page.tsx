@@ -1,21 +1,15 @@
-"use client";
-
+"use client"
 import { useState, useEffect } from 'react';
 import BarGraph from '@/components/BarCharts';
 import PieGraph from '@/components/PieCharts';
+import { ComplexNavbar } from '@/components/Navbar';
 
 export default function Home() {
-
   return (
-  <div style={{ display: 'flex', height: '100%' }}>
-
-    <main className="min-h-screen max">
-        <div style ={{display: "flex"}}> {/* temporary location */}
-          {/* <BarGraph /> */}
-          {/* <PieGraph /> */}
-          helllooooo
+      <main className='h-full w-full'>
+        <div className=''>
+          <ComplexNavbar />
         </div>
-    </main>
-  </div>
-  )
+      </main>
+  );  
 }

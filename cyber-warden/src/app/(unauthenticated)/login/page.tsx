@@ -3,9 +3,14 @@ import Link from 'next/link';
 
 export default function login(){
 
+  
+
+  // for some reason your gradient colors don't exist anymore lol
+  //  from-sky-500 to-sky-950
+
     return (
-        <main className= "bg-gradient-to-t from-sky-500 to-sky-950 flex flex-col min-h-screen items-center justify-center">
-            <div className="max-w-md w-full mx-auto mt-4 bg-white rounded-2xl p-8 borde border-gray-300">
+        <main className= "bg-gradient-to-t from-blue-gray-600 to-blue-gray-50 flex flex-col min-h-screen items-center justify-center">
+            <div className="max-w-md w-full mx-auto mt-4 bg-white rounded-2xl p-8 borde border-gray-300"> 
               {/* Stylized text **/}
               <div className="text-center mb-4">
                 <p className="text-3xl font-extrabold text-black">Login </p>

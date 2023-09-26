@@ -10,11 +10,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 255, 255; /* Text color in dark mode */
+    --background-start-rgb: 0, 0, 30; /* Dark blue gradient start color (adjust as needed) */
+    --background-end-rgb: 0, 0, 60; /* Dark blue gradient end color (adjust as needed) */
   }
 }
+
 
 /* body {
   color: rgb(var(--foreground-rgb));
