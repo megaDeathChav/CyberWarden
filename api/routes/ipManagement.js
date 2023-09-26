@@ -1,35 +1,45 @@
 const express = require('express');
 const router = express.Router();
-const port = 3000;
 
+// Initialize arrays for the blacklist and whitelist
 let blacklist = [];
 let whitelist = [];
 
-router.get('/blacklist/get', (req, res, next) => {
-  //this is for debugging
-  console.log('GET /blacklist/get route reached');
-  res.json({ blacklist });
-
-});
-
-router.post('/blacklist/add', (req, res, next) => {
+// Middleware to validate an IP address
+const validateIPAddress = (req, res, next) => {
   const { ipAddress } = req.body;
+  // Regular expression for a simple IP address format validation
+  const ipPattern = /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/;
 
+  if (!ipPattern.test(ipAddress)) {
+    return res.status(400).json({ error: 'Invalid IP address format' });
+  }
+
+  next(); // Continue to the next middleware or route handler if the IP is valid
+};
+
+// Route to add an IP address to the blacklist
+router.post('/blacklist/add', validateIPAddress, (req, res, next) => {
+  const { ipAddress } = req.body;
   blacklist.push(ipAddress);
-//this is for debugging
   res.status(201).json({ message: 'IP address added to blacklist successfully' });
 });
 
-router.get('/whitelist/get', (req, res, next) => {
-  res.json({ whitelist });
+// Route to retrieve the blacklist
+router.get('/blacklist/get', (req, res, next) => {
+  res.json({ blacklist });
 });
 
-router.post('/whitelist/add', (req, res, next) => {
+// Route to add an IP address to the whitelist
+router.post('/whitelist/add', validateIPAddress, (req, res, next) => {
   const { ipAddress } = req.body;
-
   whitelist.push(ipAddress);
-//this is for debugging
   res.status(201).json({ message: 'IP address added to whitelist successfully' });
+});
+
+// Route to retrieve the whitelist
+router.get('/whitelist/get', (req, res, next) => {
+  res.json({ whitelist });
 });
 
 module.exports = router;
