@@ -9,7 +9,7 @@ let whitelist = [];
 const validateIPAddress = (req, res, next) => {
   const { ipAddress } = req.body;
   // Regular expression for a simple IP address format validation
-  const ipPattern = /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/;
+  const ipPattern = /(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])/;
 
   if (!ipPattern.test(ipAddress)) {
     return res.status(400).json({ error: 'Invalid IP address format' });
