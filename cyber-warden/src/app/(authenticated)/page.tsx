@@ -9,11 +9,11 @@ import { CarouselDefault } from '@/components/Carousel';
 export default function Home() {
   return (
     <main className='flex flex-col items-center h-3/4'>
-        <div className='w-3/4 h-1/4 my-4'>
+        <div className='w-3/4 h-1/4 my-20'>
           <CarouselDefault />
         </div>
         
-        <div className='w-3/4 h-1/3'>
+        <div className='w-3/4 h-3/4'>
           <MembersTable />
         </div>
     </main>

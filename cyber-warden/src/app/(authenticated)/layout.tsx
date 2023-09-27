@@ -30,9 +30,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} flex flex-col bg-gradient-to-t from-blue-gray-600 to-blue-gray-50`}>
         <Providers>
-          <div className="flex h-full">
+          <div className="flex h-full w-full">
             <SidebarWithLogo />
-            <div className="">
+            <div className="h-screen w-full">
               {children}
             </div>
           </div>

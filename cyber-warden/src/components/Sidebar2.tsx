@@ -21,6 +21,7 @@ import {
   Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
+  NewspaperIcon
 } from "@heroicons/react/24/solid";
 import {
   ChevronRightIcon,
@@ -28,7 +29,9 @@ import {
   CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
- 
+import { ProfileMenu } from './ProfileMenu'; 
+import ThemeSwitcher from "./ThemeSwitcher";
+
 export function SidebarWithLogo() {
   const [open, setOpen] = React.useState(0);
   const [openAlert, setOpenAlert] = React.useState(true);
@@ -38,7 +41,7 @@ export function SidebarWithLogo() {
   };
  
   return (
-    <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] shadow-xl shadow-blue-gray-900/5 sticky top-0">
+    <Card className="h-screen w-7/8 max-w-[20rem] shadow-xl shadow-blue-gray-900/5 sticky top-0 flex items-center">
       <div className="mb-2 flex items-center gap-4 p-4">
         <img src="/assets/logo.png" alt="brand" className="h-14 w-14" />
         <Typography variant="h5" color="blue-gray">
@@ -100,10 +103,10 @@ export function SidebarWithLogo() {
           <ListItem className="p-0" selected={open === 2}>
             <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
               <ListItemPrefix>
-                <ShoppingBagIcon className="h-5 w-5" />
+                <NewspaperIcon className="h-5 w-5" />
               </ListItemPrefix>
               <Typography color="blue-gray" className="mr-auto font-normal">
-                E-Commerce
+                Server Logs
               </Typography>
             </AccordionHeader>
           </ListItem>
@@ -125,6 +128,11 @@ export function SidebarWithLogo() {
           </AccordionBody>
         </Accordion>
         <hr className="my-2 border-blue-gray-50" />
+      </List>
+      <List className="flex justify-end h-full mb-6">
+        <ListItem>
+          <ThemeSwitcher />
+        </ListItem>
         <ListItem>
           <ListItemPrefix>
             <InboxIcon className="h-5 w-5" />
@@ -134,13 +142,14 @@ export function SidebarWithLogo() {
             <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
           </ListItemSuffix>
         </ListItem>
-        <ListItem>
+        {/* <ListItem>
           <ListItemPrefix>
             <UserCircleIcon className="h-5 w-5" />
           </ListItemPrefix>
           Profile
-        </ListItem>
-        <ListItem>
+        </ListItem> */}
+        <ProfileMenu />
+        {/* <ListItem>
           <ListItemPrefix>
             <Cog6ToothIcon className="h-5 w-5" />
           </ListItemPrefix>
@@ -153,16 +162,15 @@ export function SidebarWithLogo() {
             </ListItemPrefix>
             Log Out
           </ListItem>
-        </Link>
+        </Link> */}
       </List>
-      <Alert open={openAlert} className="mt-auto" onClose={() => setOpenAlert(false)}>
+      <Alert open={openAlert} className="mt-auto w-60" onClose={() => setOpenAlert(false)}>
         <CubeTransparentIcon className="mb-4 h-12 w-12" />
         <Typography variant="h6" className="mb-1">
-          Upgrade to PRO
+          Welcome to Cyber Warden !
         </Typography>
         <Typography variant="small" className="font-normal opacity-80">
-          Upgrade to Material Tailwind PRO and get even more components, plugins, advanced features
-          and premium.
+          The capabilities of this platform are at you fingertips...
         </Typography>
         <div className="mt-4 flex gap-3">
           <Typography
@@ -175,7 +183,7 @@ export function SidebarWithLogo() {
             Dismiss
           </Typography>
           <Typography as="a" href="#" variant="small" className="font-medium">
-            Upgrade Now
+            I'm Excited
           </Typography>
         </div>
       </Alert>

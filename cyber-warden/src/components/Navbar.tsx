@@ -56,7 +56,7 @@ const profileMenuItems = [
   },
 ];
  
-function ProfileMenu() {
+export function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
  
   const closeMenu = () => setIsMenuOpen(false);
