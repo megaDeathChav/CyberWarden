@@ -38,7 +38,7 @@ export function SidebarWithLogo() {
   };
  
   return (
-    <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+    <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] shadow-xl shadow-blue-gray-900/5 sticky top-0">
       <div className="mb-2 flex items-center gap-4 p-4">
         <img src="/assets/logo.png" alt="brand" className="h-14 w-14" />
         <Typography variant="h5" color="blue-gray">

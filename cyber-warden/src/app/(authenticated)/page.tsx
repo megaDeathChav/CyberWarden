@@ -8,18 +8,14 @@ import { CarouselDefault } from '@/components/Carousel';
 
 export default function Home() {
   return (
-      <main className='flex flex-col h-full w-full overflow-clip'>
-        <div className=''>
-          <ComplexNavbar />
+    <main className='flex flex-col items-center h-3/4'>
+        <div className='w-3/4 h-1/4 my-4'>
+          <CarouselDefault />
         </div>
-        <div className='flex flex-col h-full w-full items-center'>
-          <div className='mt-10 mb-10 h-1/6 w-7/8'>
-            <CarouselDefault />
-          </div>
-          <div className='h-1/2 w-3/4'>
-            <MembersTable />
-          </div>
+        
+        <div className='w-3/4 h-1/3'>
+          <MembersTable />
         </div>
-      </main>
+    </main>
   );  
 }

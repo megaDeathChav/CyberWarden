@@ -30,6 +30,8 @@ import {
   Bars2Icon,
 } from "@heroicons/react/24/outline";
  
+import Link from "next/link";
+
 // profile menu component
 const profileMenuItems = [
   {
@@ -242,7 +244,7 @@ export function ComplexNavbar() {
   }, []);               
  
   return (
-    <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">                                                                                                    
+    <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">  
       <div className="relative mx-auto flex items-center text-blue-gray-900">
         <Typography
           as="a"                                                        
