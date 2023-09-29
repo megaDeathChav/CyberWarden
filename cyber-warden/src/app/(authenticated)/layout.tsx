@@ -4,8 +4,7 @@ import type { Metadata } from 'next'
 import Providers from './providers';
 
 
-import CustomSidebar from '@/components/CustomSidebar';                                    
-import { SidebarWithLogo } from '@/components/Sidebar2';
+import { SidebarWithLogo } from '@/components/Sidebar';
 
 // maybe experiment with fonts from here (ctrl + click) should take u to a file where the font names are defined
 import { Inter } from 'next/font/google'
@@ -28,7 +27,7 @@ export default function RootLayout({
   }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} flex flex-col bg-gradient-to-t from-blue-gray-600 to-blue-gray-50`}>
+      <body className={`${inter.className} flex flex-col bg-gradient-to-t from-blue-200 via-blue-100 to-gray-100 dark:bg-gradient-to-b dark:from-blue-gray-600 dark:via-gray-800 dark:to-blue-gray-800`}>
         <Providers>
           <div className="flex h-full w-full">
             <SidebarWithLogo />

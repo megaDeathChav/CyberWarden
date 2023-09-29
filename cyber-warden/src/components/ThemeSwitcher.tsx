@@ -4,6 +4,8 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import { DarkMode, LightMode } from "@mui/icons-material";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { Typography } from "@material-tailwind/react";
 
 
@@ -28,9 +30,9 @@ export default function ThemeSwitcher()
             >
                 {
                     theme === 'dark' ? 
-                        <LightModeOutlinedIcon className=" text-deep-orange-400 mr-3" /> 
+                        <MoonIcon className=" text-deep-orange-400 mr-3 w-5 h-5" /> 
                     :
-                        <DarkModeOutlinedIcon className=" text-blue-gray-500 mr-3" />
+                        <SunIcon className=" text-gray-700 mr-3 w-5 h-5" />
                 }
                 <Typography color='inherit' className='font-thin'>
                     {

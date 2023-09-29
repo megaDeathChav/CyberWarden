@@ -33,7 +33,9 @@ export default function login(){
                   <a href="" className="font-medium text-sm text-gray-500">Forgot Password?</a>
                 </div>
                 <div>
-                  <button className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm">Proceed</button>
+                  <Link href='/'>
+                    <button className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm">Proceed</button>
+                  </Link>
                 </div>
                 <div className="text-sm flex justify-center space-x-1 items-center">
                   <p>Don't have an account?</p>

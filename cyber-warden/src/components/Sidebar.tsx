@@ -1,347 +1,193 @@
-import React from 'react';
-import styled, { CSSObject } from '@emotion/styled';
-import classnames from 'classnames';
-import { useLegacySidebar } from '../hooks/useLegacySidebar';
-import { useMediaQuery } from '../hooks/useMediaQuery';
-import { sidebarClasses } from '../utils/utilityClasses';
-import { StyledBackdrop } from '../styles/StyledBackdrop';
+'use client';
 
-type BreakPoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'always' | 'all';
+import React from "react";
+import {
+  Card,
+  Typography,
+  List,
+  ListItem,
+  ListItemPrefix,
+  ListItemSuffix,
+  Chip,
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+  Alert,
+} from "@material-tailwind/react";
 
-const BREAK_POINTS = {
-  xs: '480px',
-  sm: '576px',
-  md: '768px',
-  lg: '992px',
-  xl: '1200px',
-  xxl: '1600px',
-  always: 'always',
-  all: 'all',
-};
+import type { CardProps } from "@material-tailwind/react";
 
-export interface SidebarProps extends React.HTMLAttributes<HTMLHtmlElement> {
-  /**
-   * sidebar collapsed status
-   */
-  collapsed?: boolean;
+import {
+  PresentationChartBarIcon,
+  NewspaperIcon,
+  ExclamationTriangleIcon
+} from "@heroicons/react/24/solid";
 
-  /**
-   * width of the sidebar
-   * @default ```250px```
-   */
-  width?: string;
+import {
+  ChevronRightIcon,
+  ChevronDownIcon,
+  CubeTransparentIcon,
+  
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { ProfileMenu } from './ProfileMenu'; 
+import ThemeSwitcher from "./ThemeSwitcher";
 
-  /**
-   * width of the sidebar when collapsed
-   * @default ```80px```
-   */
-  collapsedWidth?: string;
+export function SidebarWithLogo() {
+  const [open, setOpen] = React.useState(0);
+  const [openAlert, setOpenAlert] = React.useState(true);
+ 
+  const handleOpen = (value: number) => {
+    setOpen(open === value ? 0 : value);
+  };
 
-  /**
-   * initial collapsed status
-   * @default ```false```
-   *
-   * @deprecated use ```collapsed``` instead
-   */
-  defaultCollapsed?: boolean;
-
-  /**
-   * set when the sidebar should trigger responsiveness behavior
-   * @type `xs | sm | md | lg | xl | xxl | all | undefined`
-   */
-  breakPoint?: BreakPoint;
-
-  /**
-   * alternative breakpoint value that will be used to trigger responsiveness
-   *
-   */
-  customBreakPoint?: string;
-
-  /**
-   * sidebar background color
-   */
-  backgroundColor?: string;
-
-  /**
-   * duration for the transition in milliseconds to be used in collapse and toggle behavior
-   * @default ```300```
-   */
-  transitionDuration?: number;
-
-  /**
-   * sidebar background image
-   */
-  image?: string;
-
-  /**
-   * sidebar direction
-   */
-  rtl?: boolean;
-
-  /**
-   * sidebar toggled status
-   */
-  toggled?: boolean;
-
-  /**
-   * callback function to be called when backdrop is clicked
-   */
-  onBackdropClick?: () => void;
-
-  /**
-   * callback function to be called when sidebar's broken state changes
-   */
-  onBreakPoint?: (broken: boolean) => void;
-
-  /**
-   * sidebar styles to be applied from the root element
-   */
-  rootStyles?: CSSObject;
-
-  children?: React.ReactNode;
-}
-
-interface StyledSidebarProps extends Omit<SidebarProps, 'backgroundColor'> {
-  collapsed?: boolean;
-  toggled?: boolean;
-  broken?: boolean;
-  rtl?: boolean;
-}
-
-type StyledSidebarContainerProps = Pick<SidebarProps, 'backgroundColor'>;
-
-const StyledSidebar = styled.aside<StyledSidebarProps>`
-  position: relative;
-  border-right-width: 1px;
-  border-right-style: solid;
-  border-color: #efefef;
-  overflow-y: auto;
-
-  transition: ${({ transitionDuration }) => `width, left, right, ${transitionDuration}ms`};
-
-  width: ${({ width }) => width};
-  min-width: ${({ width }) => width};
-
-  &.${sidebarClasses.collapsed} {
-    width: ${({ collapsedWidth }) => collapsedWidth};
-    min-width: ${({ collapsedWidth }) => collapsedWidth};
-  }
-
-  &.${sidebarClasses.rtl} {
-    direction: rtl;
-    border-right-width: none;
-    border-left-width: 1px;
-    border-right-style: none;
-    border-left-style: solid;
-  }
-
-  &.${sidebarClasses} {
-    position: fixed;
-    height: 100%;
-    top: 0px;
-    z-index: 100;
-
-    ${({ rtl, width }) => (!rtl ? `left: -${width};` : '')}
-
-    &.${sidebarClasses.collapsed} {
-      ${({ rtl, collapsedWidth }) => (!rtl ? `left: -${collapsedWidth}; ` : '')}
-    }
-
-    &.${sidebarClasses.toggled} {
-      ${({ rtl }) => (!rtl ? `left: 0;` : '')}
-    }
-
-    &.${sidebarClasses.rtl} {
-      right: -${({ width }) => width};
-
-      &.${sidebarClasses.collapsed} {
-        right: -${({ collapsedWidth }) => collapsedWidth};
-      }
-
-      &.${sidebarClasses.toggled} {
-        right: 0;
-      }
-    }
-  }
-
-  ${({ rootStyles }) => rootStyles}
-`;
-
-const StyledSidebarContainer = styled.div<StyledSidebarContainerProps>`
-  position: relative;
-  height: 100%;
-  max-height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  z-index: 3;
-
-  ${({ backgroundColor }) => (backgroundColor ? `background-color:${backgroundColor};` : '')}
-`;
-
-const StyledSidebarImage = styled.img`
-  &.${sidebarClasses.image} {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 2;
-  }
-`;
-
-interface SidebarContextProps {
-  collapsed?: boolean;
-  toggled?: boolean;
-  rtl?: boolean;
-  transitionDuration?: number;
-}
-
-export const SidebarContext = React.createContext<SidebarContextProps>({
-  collapsed: false,
-  toggled: false,
-  rtl: false,
-  transitionDuration: 300,
-});
-
-export const Sidebar = React.forwardRef<HTMLHtmlElement, SidebarProps>(
-  (
-    {
-      collapsed,
-      toggled,
-      onBackdropClick,
-      onBreakPoint,
-      width = '250px',
-      collapsedWidth = '80px',
-      className,
-      children,
-      breakPoint,
-      customBreakPoint,
-      backgroundColor = 'rgb(249, 249, 249, 0.7)',
-      transitionDuration = 300,
-      image,
-      rtl,
-      rootStyles,
-      ...rest
-    },
-    ref,
-  ) => {
-    const getBreakpointValue = () => {
-      if (customBreakPoint) {
-        return `(max-width: ${customBreakPoint})`;
-      }
-
-      if (breakPoint) {
-        if (['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(breakPoint)) {
-          return `(max-width: ${BREAK_POINTS[breakPoint]})`;
-        }
-
-        if (breakPoint === 'all') {
-          return `screen`;
-        }
-
-        return `(max-width: ${breakPoint})`;
-      }
-    };
-
-    const breakpointCallbackFnRef = React.useRef<(broken: boolean) => void>();
-
-    breakpointCallbackFnRef.current = (broken: boolean) => {
-      onBreakPoint?.(broken);
-    };
-
-    const broken = useMediaQuery(getBreakpointValue());
-
-    const [mounted, setMounted] = React.useState(false);
-
-    const legacySidebarContext = useLegacySidebar();
-
-    const collapsedValue =
-      collapsed ?? (!mounted ? true : legacySidebarContext?.collapsed);
-    const toggledValue = toggled ?? legacySidebarContext?.toggled;
-
-    const handleBackdropClick = () => {
-      onBackdropClick?.();
-      legacySidebarContext?.updateSidebarState({ toggled: false });
-    };
-
-    React.useEffect(() => {
-      breakpointCallbackFnRef.current?.(broken);
-    }, [broken]);
-
-    // TODO: remove in next major version
-    React.useEffect(() => {
-      legacySidebarContext?.updateSidebarState({ broken, rtl, transitionDuration });
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [broken, legacySidebarContext?.updateSidebarState, rtl, transitionDuration]);
-
-    // TODO: remove in next major version
-    React.useEffect(() => {
-      if (!mounted) {
-        legacySidebarContext?.updateSidebarState({
-          collapsed: collapsed,
-        });
-        setMounted(true);
-      }
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [collapsed, mounted, legacySidebarContext?.updateSidebarState]);
-
-    return (
-      <SidebarContext.Provider
-        value={{ collapsed: collapsedValue, toggled: toggledValue, rtl, transitionDuration }}
-      >
-        <StyledSidebar
-          ref={ref}
-          data-testid={`${sidebarClasses.root}-test-id`}
-          rtl={rtl}
-          rootStyles={rootStyles}
-          width={width}
-          collapsedWidth={collapsedWidth}
-          transitionDuration={transitionDuration}
-          className={classnames(
-            sidebarClasses.root,
-            {
-              [sidebarClasses.collapsed]: collapsedValue,
-              [sidebarClasses.toggled]: toggledValue,
-              [sidebarClasses.broken]: broken,
-              [sidebarClasses.rtl]: rtl,
-            },
-            className,
-          )}
-          {...rest}
+  return (
+    <Card variant="gradient" className="rounded-none h-screen w-7/8 max-w-[20rem] shadow-2xl shadow-black dark:bg-gradient-to-b dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
+      <div className="mb-2 flex items-center gap-4 p-4">
+        <img src="/assets/logo.png" alt="brand" className="h-14 w-14" /> 
+        <Typography variant="h5" color="blue-gray" className="dark:text-gray-200">
+          Cyber Warden
+        </Typography>
+      </div>
+      <List>
+        <Accordion
+          open={open === 1}
+          icon={
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`mx-auto h-4 w-4 transition-transform dark:text-gray-200 ${open === 1 ? "rotate-180" : ""}`}
+            />
+          }
         >
-          <StyledSidebarContainer
-            data-testid={`${sidebarClasses.container}-test-id`}
-            className={sidebarClasses.container}
-            backgroundColor={backgroundColor}
+          <ListItem className="p-0 hover:dark:bg-gray-600">
+            <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
+              <ListItemPrefix>
+                <PresentationChartBarIcon className="h-5 w-5 dark:text-gray-400 " />
+              </ListItemPrefix>
+              <Typography color="blue-gray" className="mr-auto font-normal dark:text-gray-200">
+                Dashboard
+              </Typography>
+            </AccordionHeader>
+          </ListItem>
+          <AccordionBody className="py-1">
+            <List className="p-0">
+              <ListItem className="dark:text-gray-200 hover:dark:bg-gray-600">
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                </ListItemPrefix>
+                Analytics
+              </ListItem>
+              <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                </ListItemPrefix>
+                Reporting
+              </ListItem>
+              <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                </ListItemPrefix>
+                Projects
+              </ListItem>
+            </List>
+          </AccordionBody>
+        </Accordion>
+        <Accordion
+          open={open === 2}
+          icon={
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`mx-auto h-4 w-4 transition-transform dark:text-gray-200 ${open === 2 ? "rotate-180" : ""}`}
+            />
+          }
+        >
+          <ListItem className="p-0 hover:dark:bg-gray-600">
+            <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
+              <ListItemPrefix>
+                <NewspaperIcon className="h-5 w-5 dark:text-gray-400 " />
+              </ListItemPrefix>
+              <Typography color="blue-gray" className="mr-auto font-normal dark:text-gray-200">
+                Server Logs
+              </Typography>
+            </AccordionHeader>
+          </ListItem>
+          <AccordionBody className="py-1">
+            <List className="p-0">
+              <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                </ListItemPrefix>
+                Orders
+              </ListItem>
+              <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+                <ListItemPrefix>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                </ListItemPrefix>
+                Products
+              </ListItem>
+            </List>
+          </AccordionBody>
+        </Accordion>
+        <hr className="my-2 border-blue-gray-50" />
+      </List>
+      <List className="flex justify-end h-full mb-6">
+        <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+          <ThemeSwitcher />
+        </ListItem>
+        <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+          <ListItemPrefix>
+            <ExclamationTriangleIcon className="h-5 w-5 dark:text-yellow-900" />
+          </ListItemPrefix>
+          Alerts
+          <ListItemSuffix>
+            <Chip value="14" size="sm" variant="ghost" color="red" className="rounded-full dark:text-yellow-900" />
+          </ListItemSuffix>
+        </ListItem>
+        {/* <ListItem>
+          <ListItemPrefix>
+            <UserCircleIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Profile
+        </ListItem> */}
+        <ProfileMenu />
+        {/* <ListItem>
+          <ListItemPrefix>
+            <Cog6ToothIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Settings
+        </ListItem>
+        <Link href='/login'>
+          <ListItem>
+            <ListItemPrefix>
+              <PowerIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            Log Out
+          </ListItem>
+        </Link> */}
+      </List>
+      <Alert open={openAlert} className="mt-auto w-56 m-6" onClose={() => setOpenAlert(false)}>
+        <CubeTransparentIcon className="mb-4 h-12 w-12" />
+        <Typography variant="h6" className="mb-1">
+          Welcome to Cyber Warden !
+        </Typography>
+        <Typography variant="small" className="font-normal opacity-80">
+          The capabilities of this platform are at you fingertips...
+        </Typography>
+        <div className="mt-4 flex gap-3">
+          <Typography
+            as="a"
+            href="#"
+            variant="small"
+            className="font-medium opacity-80"
+            onClick={() => setOpenAlert(false)}
           >
-            {children}
-          </StyledSidebarContainer>
-
-          {image && (
-            <StyledSidebarImage
-              data-testid={`${sidebarClasses.image}-test-id`}
-              src={image}
-              alt="sidebar background"
-              className={sidebarClasses.image}
-            />
-          )}
-
-          {broken && toggledValue && (
-            <StyledBackdrop
-              data-testid={`${sidebarClasses.backdrop}-test-id`}
-              role="button"
-              tabIndex={0}
-              aria-label="backdrop"
-              onClick={handleBackdropClick}
-              className={sidebarClasses.backdrop}
-            />
-          )}
-        </StyledSidebar>
-      </SidebarContext.Provider>
-    );
-  },
-);
+            Dismiss
+          </Typography>
+          <Typography as="a" href="#" variant="small" className="font-medium">
+            I'm Excited
+          </Typography>
+        </div>
+      </Alert>
+    </Card>
+  );
+}
