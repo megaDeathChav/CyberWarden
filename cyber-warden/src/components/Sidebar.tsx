@@ -32,10 +32,14 @@ import {
 import Link from "next/link";
 import { ProfileMenu } from './ProfileMenu'; 
 import ThemeSwitcher from "./ThemeSwitcher";
+import { DialogCustomAnimation } from "./Dialoge";
 
 export function SidebarWithLogo() {
   const [open, setOpen] = React.useState(0);
   const [openAlert, setOpenAlert] = React.useState(true);
+
+  const [tableOpen, setTableOpen] = React.useState(false);
+  const handleTableOpen = () => setTableOpen(!tableOpen);
  
   const handleOpen = (value: number) => {
     setOpen(open === value ? 0 : value);
@@ -73,7 +77,7 @@ export function SidebarWithLogo() {
             <List className="p-0">
               <ListItem className="dark:text-gray-200 hover:dark:bg-gray-600">
                 <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200"/>
                 </ListItemPrefix>
                 Analytics
               </ListItem>

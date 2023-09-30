@@ -56,7 +56,7 @@ export function ProfileMenu() {
           </Typography>
           <ChevronDownIcon
             strokeWidth={2.5}
-            className={`h-3 w-3 grid place-items-center ml-auto justify-self-end transition-transform dark:text-gray-200${
+            className={`h-3 w-3 grid place-items-center ml-auto justify-self-end transition-transform dark:text-gray-200 ${
               isMenuOpen ? "rotate-[-90deg]" : ""
             }`}
           />

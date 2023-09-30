@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import BarGraph from '@/components/BarCharts';
 import PieGraph from '@/components/PieCharts';
 import { ComplexNavbar } from '@/components/Navbar';
-import { MembersTable } from '@/components/Datagrid';
+import Datagrid from '@/components/Datagrid';
 import { CarouselDefault } from '@/components/Carousel';
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
         </div>
         
         <div className='w-3/4 h-3/4'>
-          <MembersTable />
+          <Datagrid />
         </div>
     </main>
   );  
