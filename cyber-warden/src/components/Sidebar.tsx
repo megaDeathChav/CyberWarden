@@ -46,10 +46,10 @@ export function SidebarWithLogo() {
   };
 
   return (
-    <Card variant="gradient" className="rounded-none h-screen w-7/8 max-w-[20rem] shadow-2xl shadow-black dark:bg-gradient-to-b dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
+    <Card variant="gradient" className="rounded-none h-screen w-7/8 max-w-[20rem] shadow-2xl bg-gradient-to-t from-blue-100 via-blue-200 to-blue-100 shadow-black dark:bg-gradient-to-b dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
       <div className="mb-2 flex items-center gap-4 p-4">
         <img src="/assets/logo.png" alt="brand" className="h-14 w-14" /> 
-        <Typography variant="h5" color="blue-gray" className="dark:text-gray-200">
+        <Typography variant="h5" color="blue-gray" className="text-black dark:text-gray-200">
           Cyber Warden
         </Typography>
       </div>
@@ -59,37 +59,37 @@ export function SidebarWithLogo() {
           icon={
             <ChevronDownIcon
               strokeWidth={2.5}
-              className={`mx-auto h-4 w-4 transition-transform dark:text-gray-200 ${open === 1 ? "rotate-180" : ""}`}
+              className={`mx-auto h-4 w-4 transition-transform text-black dark:text-gray-200 ${open === 1 ? "rotate-180" : ""}`}
             />
           }
         >
-          <ListItem className="p-0 hover:dark:bg-gray-600">
+          <ListItem className="p-0 hover:bg-blue-300 hover:dark:bg-gray-600">
             <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
               <ListItemPrefix>
-                <PresentationChartBarIcon className="h-5 w-5 dark:text-gray-400 " />
+                <PresentationChartBarIcon className="h-5 w-5 text-black dark:text-gray-400 " />
               </ListItemPrefix>
-              <Typography color="blue-gray" className="mr-auto font-normal dark:text-gray-200">
+              <Typography color="blue-gray" className="mr-auto font-normal text-black dark:text-gray-200">
                 Dashboard
               </Typography>
             </AccordionHeader>
           </ListItem>
           <AccordionBody className="py-1">
             <List className="p-0">
-              <ListItem className="dark:text-gray-200 hover:dark:bg-gray-600">
+              <ListItem className="text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600">
                 <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200"/>
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200"/>
                 </ListItemPrefix>
                 Analytics
               </ListItem>
-              <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
                 <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200" />
                 </ListItemPrefix>
                 Reporting
               </ListItem>
-              <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
                 <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200" />
                 </ListItemPrefix>
                 Projects
               </ListItem>
@@ -101,31 +101,31 @@ export function SidebarWithLogo() {
           icon={
             <ChevronDownIcon
               strokeWidth={2.5}
-              className={`mx-auto h-4 w-4 transition-transform dark:text-gray-200 ${open === 2 ? "rotate-180" : ""}`}
+              className={`mx-auto h-4 w-4 transition-transform text-black dark:text-gray-200 ${open === 2 ? "rotate-180" : ""}`}
             />
           }
         >
-          <ListItem className="p-0 hover:dark:bg-gray-600">
+          <ListItem className="p-0  hover:bg-blue-300 hover:dark:bg-gray-600">
             <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
               <ListItemPrefix>
-                <NewspaperIcon className="h-5 w-5 dark:text-gray-400 " />
+                <NewspaperIcon className="h-5 w-5 text-black dark:text-gray-400 " />
               </ListItemPrefix>
-              <Typography color="blue-gray" className="mr-auto font-normal dark:text-gray-200">
+              <Typography color="blue-gray" className="mr-auto font-normal text-black dark:text-gray-200">
                 Server Logs
               </Typography>
             </AccordionHeader>
           </ListItem>
           <AccordionBody className="py-1">
             <List className="p-0">
-              <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
                 <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200" />
                 </ListItemPrefix>
                 Orders
               </ListItem>
-              <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
                 <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 dark:text-gray-200" />
+                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200" />
                 </ListItemPrefix>
                 Products
               </ListItem>
@@ -135,16 +135,16 @@ export function SidebarWithLogo() {
         <hr className="my-2 border-blue-gray-50" />
       </List>
       <List className="flex justify-end h-full mb-6">
-        <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+        <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
           <ThemeSwitcher />
         </ListItem>
-        <ListItem className='dark:text-gray-200 hover:dark:bg-gray-600'>
+        <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
           <ListItemPrefix>
-            <ExclamationTriangleIcon className="h-5 w-5 dark:text-yellow-900" />
+            <ExclamationTriangleIcon className="h-5 w-5 text-gray-800 dark:text-yellow-900" />
           </ListItemPrefix>
           Alerts
           <ListItemSuffix>
-            <Chip value="14" size="sm" variant="ghost" color="red" className="rounded-full dark:text-yellow-900" />
+            <Chip value="14" size="sm" variant="ghost" color="red" className="rounded-full text-orange-900 dark:text-yellow-900" />
           </ListItemSuffix>
         </ListItem>
         {/* <ListItem>

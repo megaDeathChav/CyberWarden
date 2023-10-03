@@ -42,7 +42,7 @@ export function ProfileMenu() {
         <Button
           variant="text"
           color="blue-gray"
-          className="flex justify-start items-center w-full gap-2 p-2 lg:ml-auto dark:hover:bg-gray-600"
+          className="flex justify-start items-center w-full gap-2 p-2 lg:ml-auto hover:bg-blue-300 dark:hover:bg-gray-600"
         >
           <Avatar
             variant="circular"
@@ -51,12 +51,12 @@ export function ProfileMenu() {
             className="border border-gray-900 dark:border-white p-0.5"
             src="/assets/logo.png"
           />
-          <Typography color='inherit' className='font-thin normal-case dark:text-white'>
+          <Typography color='inherit' className='font-thin normal-case text-black dark:text-white'>
             Administrator
           </Typography>
           <ChevronDownIcon
             strokeWidth={2.5}
-            className={`h-3 w-3 grid place-items-center ml-auto justify-self-end transition-transform dark:text-gray-200 ${
+            className={`h-3 w-3 grid place-items-center ml-auto justify-self-end transition-transform text-black dark:text-gray-200 ${
               isMenuOpen ? "rotate-[-90deg]" : ""
             }`}
           />
