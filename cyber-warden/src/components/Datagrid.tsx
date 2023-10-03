@@ -37,7 +37,12 @@ const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
 
 type User = typeof users[0];
 
-export default function Datagrid() {
+type DatagridProps = {
+  handleDialogOpen: () => void;
+};
+
+export default function Datagrid({handleDialogOpen}: DatagridProps) {
+
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
@@ -131,7 +136,7 @@ export default function Datagrid() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
+                <DropdownItem onClick={handleDialogOpen}>View</DropdownItem>
                 <DropdownItem>Edit</DropdownItem>
                 <DropdownItem>Delete</DropdownItem>
               </DropdownMenu>
