@@ -1,23 +1,33 @@
 import { Carousel } from "@material-tailwind/react";
+// import { PieChart } from "@mui/icons-material";
+import  BasicPie  from "./PieCharts";
+import BasicLineChart from "./LineCharts";
+import BasicBars from "./BarCharts";
  
 export function CarouselDefault() {
   return (
-    <Carousel className="rounded-xl">
-      <img
-        src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-        alt="image 1"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-        alt="image 3"
-        className="h-full w-full object-cover"
-      />
+    <Carousel className="rounded-x1">
+      <div className='flex justify-center items-center h-full'>
+        <BasicBars
+          xAxis={[{id: 'barCategories', data: ['bar A', 'bar B', 'bar C'],scaleType: 'band',}]}
+          series={[{data: [2, 5, 3]}]}
+          width={600} height={320}
+        />
+      </div>
+      <div className='flex justify-center items-center h-full'>
+        <BasicPie
+        colors={['green', 'blue', 'red']}
+        series={[{data: [{ id: 0, value: 50, label: 'series A' },{ id: 1, value: 10, label: 'series B' },{ id: 2, value: 20, label: 'series C' },],},]}
+        width={400} height={230}
+        />
+      </div>
+      <div className='flex justify-center items-center h-full'>
+        <BasicLineChart
+          xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+          series={[{data: [2, 5.5, 2, 8.5, 1.5, 5],},]}
+          width={400} height={320}
+        />
+      </div>
     </Carousel>
   );
 }
