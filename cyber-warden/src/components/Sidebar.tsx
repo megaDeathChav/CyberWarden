@@ -46,7 +46,7 @@ export function SidebarWithLogo() {
   };
 
   return (
-    <Card variant="gradient" className="rounded-none h-screen w-7/8 max-w-[20rem] shadow-2xl bg-gradient-to-t from-blue-100 via-blue-200 to-blue-100 shadow-black dark:bg-gradient-to-b dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
+    <Card variant="gradient" className="rounded-none h-screen w-7/8 max-w-[20rem] shadow-2xl bg-gradient-to-t from-blue-50 via-blue-100 to-blue-50 shadow-black dark:bg-gradient-to-b dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
       <div className="mb-2 flex items-center gap-4 p-4">
         <img src="/assets/logo.png" alt="brand" className="h-14 w-14" /> 
         <Typography variant="h5" color="blue-gray" className="text-black dark:text-gray-200">
@@ -66,7 +66,7 @@ export function SidebarWithLogo() {
           <ListItem className="p-0 hover:bg-blue-300 hover:dark:bg-gray-600">
             <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
               <ListItemPrefix>
-                <PresentationChartBarIcon className="h-5 w-5 text-black dark:text-gray-400 " />
+                <PresentationChartBarIcon className="h-5 w-5 text-blue-800 dark:text-gray-400 " />
               </ListItemPrefix>
               <Typography color="blue-gray" className="mr-auto font-normal text-black dark:text-gray-200">
                 Dashboard
@@ -108,7 +108,7 @@ export function SidebarWithLogo() {
           <ListItem className="p-0  hover:bg-blue-300 hover:dark:bg-gray-600">
             <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
               <ListItemPrefix>
-                <NewspaperIcon className="h-5 w-5 text-black dark:text-gray-400 " />
+                <NewspaperIcon className="h-5 w-5 text-blue-800 dark:text-gray-400 " />
               </ListItemPrefix>
               <Typography color="blue-gray" className="mr-auto font-normal text-black dark:text-gray-200">
                 Server Logs
@@ -140,7 +140,7 @@ export function SidebarWithLogo() {
         </ListItem>
         <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
           <ListItemPrefix>
-            <ExclamationTriangleIcon className="h-5 w-5 text-gray-800 dark:text-yellow-900" />
+            <ExclamationTriangleIcon className="h-5 w-5 text-yellow-900 dark:text-yellow-900" />
           </ListItemPrefix>
           Alerts
           <ListItemSuffix>

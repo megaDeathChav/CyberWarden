@@ -241,11 +241,11 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {users.length} users</span>
-          <label className="flex items-center text-default-400 text-small">
+          <span className="text-black text-small">Total {users.length} users</span>
+          <label className="flex items-center text-black text-small">
             Rows per page:
             <select
-              className="bg-transparent outline-none text-default-400 text-small"
+              className="bg-transparent outline-none text-black text-small"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -269,7 +269,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
+        <span className="w-[30%] text-small text-black">
           {selectedKeys === "all"
             ? "All items selected"
             : `${selectedKeys.size} of ${filteredItems.length} selected`}
@@ -283,8 +283,8 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
           total={pages}
           onChange={setPage}
         />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+        <div className= "hidden sm:flex w-[30%] justify-end gap-2">
+          <Button  isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
             Previous
           </Button>
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
