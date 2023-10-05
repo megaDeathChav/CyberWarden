@@ -1,6 +1,8 @@
+import { headers } from 'next/headers';
+
 //ipManagement.js
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
 
 // Initialize arrays for the blacklist and whitelist
 let blacklist = [];
@@ -10,10 +12,10 @@ let whitelist = [];
 const validateIPAddress = (req, res, next) => {
   const { ipAddress } = req.body;
   // Regular expression for a simple IP address format validation
-  const ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]).){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
+  const ipPattern =
+    /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]).){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
 
   console.log('Received IP:', ipAddress);
-
 
   if (!ipPattern.test(ipAddress)) {
     return res.status(400).json({ error: 'Invalid IP address format' });
@@ -26,7 +28,9 @@ const validateIPAddress = (req, res, next) => {
 router.post('/blacklist/add', validateIPAddress, (req, res, next) => {
   const { ipAddress } = req.body;
   blacklist.push(ipAddress);
-  res.status(201).json({ message: 'IP address added to blacklist successfully' });
+  res
+    .status(201)
+    .json({ message: 'IP address added to blacklist successfully' });
   console.log('Adding IP to blacklist:', ipAddress);
 });
 
@@ -39,7 +43,9 @@ router.get('/blacklist/get', (req, res, next) => {
 router.post('/whitelist/add', validateIPAddress, (req, res, next) => {
   const { ipAddress } = req.body;
   whitelist.push(ipAddress);
-  res.status(201).json({ message: 'IP address added to whitelist successfully' });
+  res
+    .status(201)
+    .json({ message: 'IP address added to whitelist successfully' });
 });
 
 // Route to retrieve the whitelist
