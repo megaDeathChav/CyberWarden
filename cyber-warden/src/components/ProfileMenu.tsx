@@ -48,7 +48,7 @@ export function ProfileMenu() {
             variant="circular"
             size="sm"
             alt="tania andrew"
-            className="border border-gray-900 dark:border-white p-0.5"
+            className="border border-blue-800 dark:border-white p-0.5"
             src="/assets/logo.png"
           />
           <Typography color='inherit' className='font-thin normal-case text-black dark:text-white'>
