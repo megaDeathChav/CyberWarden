@@ -46,7 +46,7 @@ export function SidebarWithLogo() {
   };
 
   return (
-    <Card variant="gradient" className="rounded-none h-screen w-7/8 max-w-[20rem] shadow-2xl bg-gradient-to-t from-blue-50 via-blue-100 to-blue-50 shadow-black dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-700 dark:to-gray-900">
+    <Card variant="gradient" className="rounded-none h-screen w-7/8 max-w-[20rem] shadow-2xl bg-gradient-to-t from-blue-100 via-blue-200 to-blue-100 shadow-black dark:shadow-white dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
       <div className="mb-2 flex items-center gap-4 p-4">
         <img src="/assets/logo.png" alt="brand" className="h-14 w-14" /> 
         <Typography variant="h5" color="blue-gray" className="text-black dark:text-gray-200">
@@ -63,7 +63,7 @@ export function SidebarWithLogo() {
             />
           }
         >
-          <ListItem className="p-0 hover:bg-blue-300 hover:dark:bg-gray-600">
+          <ListItem className="p-0 hover:bg-blue-300 hover:dark:bg-purple-900">
             <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
               <ListItemPrefix>
                 <PresentationChartBarIcon className="h-5 w-5 text-blue-800 dark:text-gray-400 " />
@@ -75,19 +75,19 @@ export function SidebarWithLogo() {
           </ListItem>
           <AccordionBody className="py-1">
             <List className="p-0">
-              <ListItem className="text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600">
+              <ListItem className="text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-purple-900">
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200"/>
                 </ListItemPrefix>
                 Analytics
               </ListItem>
-              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
+              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-purple-900'>
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200" />
                 </ListItemPrefix>
                 Reporting
               </ListItem>
-              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
+              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-purple-900'>
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200" />
                 </ListItemPrefix>
@@ -105,7 +105,7 @@ export function SidebarWithLogo() {
             />
           }
         >
-          <ListItem className="p-0  hover:bg-blue-300 hover:dark:bg-gray-600">
+          <ListItem className="p-0  hover:bg-blue-300 hover:dark:bg-purple-900">
             <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
               <ListItemPrefix>
                 <NewspaperIcon className="h-5 w-5 text-blue-800 dark:text-gray-400 " />
@@ -117,13 +117,13 @@ export function SidebarWithLogo() {
           </ListItem>
           <AccordionBody className="py-1">
             <List className="p-0">
-              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
+              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-purple-900'>
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200" />
                 </ListItemPrefix>
                 Orders
               </ListItem>
-              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
+              <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-purple-900'>
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5 text-black dark:text-gray-200" />
                 </ListItemPrefix>
@@ -135,16 +135,16 @@ export function SidebarWithLogo() {
         <hr className="my-2 border-blue-gray-50" />
       </List>
       <List className="flex justify-end h-full mb-6">
-        <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
+        <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-purple-900'>
           <ThemeSwitcher />
         </ListItem>
-        <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-gray-600'>
+        <ListItem className='text-black hover:bg-blue-300 dark:text-gray-200 hover:dark:bg-purple-900'>
           <ListItemPrefix>
-            <ExclamationTriangleIcon className="h-5 w-5 text-yellow-900 dark:text-yellow-900" />
+            <ExclamationTriangleIcon className="h-5 w-5 text-yellow-900 dark:text-red-700" />
           </ListItemPrefix>
           Alerts
           <ListItemSuffix>
-            <Chip value="14" size="sm" variant="ghost" color="red" className="rounded-full text-orange-900 dark:text-yellow-900" />
+            <Chip value="14" size="sm" variant="ghost" color="red" className="rounded-full text-orange-900 dark:text-red-400" />
           </ListItemSuffix>
         </ListItem>
         {/* <ListItem>
