@@ -27,7 +27,7 @@ export default function RootLayout({
   }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} flex flex-col bg-gradient-to-t from-blue-200 via-blue-100 to-gray-100 dark:bg-gradient-to-b dark:from-blue-gray-600 dark:via-gray-800 dark:to-blue-gray-800`}>
+      <body className={`${inter.className} flex flex-col bg-gradient-to-t from-gray-200 via-blue-100 to-gray-100 dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-700 dark:to-gray-900`}>
         <Providers>
           <div className="flex h-full w-full">
             <SidebarWithLogo />
