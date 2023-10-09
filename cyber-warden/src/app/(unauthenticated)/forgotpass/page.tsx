@@ -7,7 +7,7 @@ export default function forgotpass(){
             <div className="max-w-md w-full mx-auto mt-4 bg-white rounded-2xl p-8 borde border-gray-300"> 
               {/* Stylized text **/}
               <div className="text-center mb-4">
-                <p className="text-2xl font-extrabold text-black">Forgot Password </p>
+                <p className="text-2xl font-extrabold text-black">Forgot Password</p>
                 <p className="text-sm font-bold text-gray-600">Please enter yout email address</p>
                 <p className="text-sm font-bold text-gray-600">and we will send you an email</p>
                 <p className="text-sm font-bold text-gray-600">to reset your password</p>
