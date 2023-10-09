@@ -30,7 +30,7 @@ export default function ThemeSwitcher()
             >
                 {
                     theme === 'dark' ? 
-                        <SunIcon className=" text-deep-orange-400 mr-3 w-5 h-5" /> 
+                        <SunIcon className=" text-yellow-600 mr-3 w-5 h-5" /> 
                     :
                         <MoonIcon className=" text-gray-700 mr-3 w-5 h-5" />
                 }
