@@ -1,9 +1,8 @@
 import Signup from '../signup/page';
+import forgotpass from '../forgotpass/page'
 import Link from 'next/link';
 
 export default function login(){
-
-  
 
   // for some reason your gradient colors don't exist anymore lol
   //  from-sky-500 to-sky-950
@@ -30,7 +29,9 @@ export default function login(){
                     <input type="checkbox" id="rememberMe" className="h-4 w-4 text-blue-300 rounded" />
                     <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-500">Remember me</label>
                   </div>
-                  <a href="" className="font-medium text-sm text-gray-500">Forgot Password?</a>
+                  <div className="font-medium text-sm text-gray-500">
+                    <Link href='/forgotpass'>Forgot Password?</Link>
+                    </div>
                 </div>
                 <div>
                   <Link href='/'>
