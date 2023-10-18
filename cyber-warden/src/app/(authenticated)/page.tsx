@@ -12,6 +12,12 @@ export default function Home() {
 
   const handleDialogOpen = () => setDialogOpen(!open);
 
+  const addHostsToDB = async () => {
+    const res = await fetch('http://localhost:3000/api/hosts');
+    const data = await res.json();
+    console.log(data);
+  }
+
   return (
     <main className='flex flex-col items-center h-3/4'>
         <div className='w-3/5 h-3/5 my-10'>

@@ -26,14 +26,15 @@ import {ChevronDownIcon} from "@/icons/ChevronDownIcon";
 import {SearchIcon} from "@/icons/SearchIcon";
 import {columns, users, statusOptions} from "@/data/data";
 import {capitalize} from "@/utils/utils";
+import Image from "next/image";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+  connected: "success",
+  disconnected: "danger",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["hostname", "ip", "os", "incidents", "status", "actions"];
+
 
 type User = typeof users[0];
 
@@ -49,7 +50,6 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: "age",
     direction: "ascending",
   });
 
@@ -68,7 +68,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
-        user.name.toLowerCase().includes(filterValue.toLowerCase()),
+        user.hostname.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
@@ -87,6 +87,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
     const end = start + rowsPerPage;
 
     return filteredItems.slice(start, end);
+
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
@@ -102,22 +103,29 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
 
-    switch (columnKey) {
-      case "name":
+  switch (columnKey) {
+      case "os":
         return (
-          <User
-            avatarProps={{radius: "lg", src: user.avatar}}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
+          <div className="flex flex-col ">
+            <Image alt='OS Img' width={40} height={40} src={cellValue.toString().toLowerCase() === 'windows' ? '/assets/windows.png' : '/assets/linux.png'} />
+          </div>
         );
-      case "role":
+      case "hostname":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{user.team}</p>
+          </div>
+        );
+      case "ip":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{cellValue}</p>
+          </div>
+        );
+      case "incidents":
+        return (
+          <div className="flex pl-6">
+            <p className="text-bold text-small capitalize">{cellValue}</p>
           </div>
         );
       case "status":
@@ -128,7 +136,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
         );
       case "actions":
         return (
-          <div className="relative flex justify-end items-center gap-2">
+          <div className="relative flex justify-center items-center gap-2">
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
@@ -235,17 +243,14 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />}>
-              Add New
-            </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-black text-small">Total {users.length} users</span>
-          <label className="flex items-center text-black text-small">
+          <span className="text-default-400 text-small">Total {users.length} users</span>
+          <label className="flex items-center text-default-400 text-small">
             Rows per page:
             <select
-              className="bg-transparent outline-none text-black text-small"
+              className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -269,7 +274,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-black">
+        <span className="w-[30%] text-small text-default-400">
           {selectedKeys === "all"
             ? "All items selected"
             : `${selectedKeys.size} of ${filteredItems.length} selected`}
@@ -283,8 +288,8 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
           total={pages}
           onChange={setPage}
         />
-        <div className= "hidden sm:flex w-[30%] justify-end gap-2">
-          <Button  isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+        <div className="hidden sm:flex w-[30%] justify-end gap-2">
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
             Previous
           </Button>
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
@@ -317,6 +322,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
           <TableColumn
             key={column.uid}
             align={column.uid === "actions" ? "center" : "start"}
+            className={`${column.uid === "actions" ? "text-center " : ''} ${column.uid === "os" ? "pl-6" : ''}`}
             allowsSorting={column.sortable}
           >
             {column.name}

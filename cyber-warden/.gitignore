@@ -37,3 +37,4 @@ next-env.d.ts
 
 # whatever Jaylon told me to do (Bruce)
 package-lock.json
+.env

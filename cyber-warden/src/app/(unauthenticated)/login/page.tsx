@@ -1,6 +1,7 @@
 import Signup from '../signup/page';
 import forgotpass from '../forgotpass/page'
 import Link from 'next/link';
+import { userLoginWithPass } from '@/actions/serverActions'
 
 export default function login(){
 
@@ -15,14 +16,14 @@ export default function login(){
                 <p className="text-3xl font-extrabold text-black">Login </p>
                 <p className="text-sm font-bold text-gray-600">to Cyberwarden</p>
               </div>
-              <form action="" className="space-y-6">
+              <form action={userLoginWithPass} className="space-y-6">
                 <div>
-                  <label htmlFor="username" className="text-sm font-bold text-black block">Username</label>
-                  <input type="text" id="username" className="w-full p-2 border border-gray-300 rounded mt-1" />
+                  <label htmlFor="email" className="text-sm font-bold text-black block">Email</label>
+                  <input type="text" name='email' id="email" className="w-full p-2 border border-gray-300 rounded mt-1" />
                 </div>
                 <div>
                   <label htmlFor="password" className="text-sm font-bold text-black block">Password</label>
-                  <input type="password" id="password" className="w-full p-2 border border-gray-300 rounded mt-1" />
+                  <input type="password" id="password" name='password' className="w-full p-2 border border-gray-300 rounded mt-1" />
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
@@ -34,9 +35,9 @@ export default function login(){
                     </div>
                 </div>
                 <div>
-                  <Link href='/'>
-                    <button className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm">Proceed</button>
-                  </Link>
+                  {/* <Link href='/'> */}
+                    <button type='submit' className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm">Proceed</button>
+                  {/* </Link> */}
                 </div>
                 <div className="text-sm flex justify-center space-x-1 items-center">
                   <p>Don't have an account?</p>
