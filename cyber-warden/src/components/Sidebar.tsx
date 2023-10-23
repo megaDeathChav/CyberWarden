@@ -54,7 +54,7 @@ export function SidebarWithLogo() {
         </Typography>
       </div>
       <List>
-        <button className="p-0 hover:bg-blue-300 hover:dark:bg-purple-900 w-full text-left">
+        <button className="py-2 px-4 rounded-md hover:bg-blue-300 hover:dark:bg-purple-900 w-full text-left">
         <div className="flex items-center">
           <PresentationChartBarIcon className="h-5 w-5 text-blue-800 dark:text-gray-400" />
           <span className="ml-2 font-normal text-black dark:text-gray-200">
@@ -63,7 +63,7 @@ export function SidebarWithLogo() {
         </div>
         </button>
 
-        <button className="p-0 hover:bg-blue-300 hover:dark:bg-purple-900 w-full text-left">
+        <button className="py-2 px-4 rounded-md hover:bg-blue-300 hover:dark:bg-purple-900 w-full text-left">
         <div className="flex items-center">
           <NewspaperIcon className="h-5 w-5 text-blue-800 dark:text-gray-400" />
           <span className="ml-2 font-normal text-black dark:text-gray-200">
