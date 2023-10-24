@@ -1,7 +1,7 @@
 import Signup from '../signup/page';
 import forgotpass from '../forgotpass/page'
 import Link from 'next/link';
-import { userLoginWithPass } from '@/actions/serverActions'
+import { userLoginWithPass, userSignUp } from '@/actions/serverActions'
 
 export default function login(){
 
@@ -40,7 +40,7 @@ export default function login(){
                   {/* </Link> */}
                 </div>
                 <div className="text-sm flex justify-center space-x-1 items-center">
-                  <p>Don't have an account?</p>
+                  <p>Don&apos;t have an account?</p>
                   <div className="bg-white hover:bg-stone-200 underline font-bold rounded-md text-blue-500 text-sm">
                     <Link href='/signup'>Create an Account </Link>
                   </div>
