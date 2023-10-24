@@ -42,13 +42,13 @@ export function ProfileMenu() {
         <Button
           variant="text"
           color="blue-gray"
-          className="flex justify-start items-center w-full gap-2 p-2 lg:ml-auto hover:bg-blue-300 dark:hover:bg-gray-600"
+          className="flex justify-start items-center w-full gap-2 p-2 lg:ml-auto hover:bg-blue-200 dark:hover:bg-gray-600"
         >
           <Avatar
             variant="circular"
             size="sm"
             alt="tania andrew"
-            className="border border-blue-800 dark:border-white p-0.5"
+            className="border border-black dark:border-white p-0.5"
             src="/assets/logo.png"
           />
           <Typography color='inherit' className='font-thin normal-case text-black dark:text-white'>

@@ -247,7 +247,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">Total {users.length} users</span>
-          <label className="flex items-center text-default-400 text-small">
+          <label className="flex color-black items-center text-default-400 text-small">
             Rows per page:
             <select
               className="bg-transparent outline-none text-default-400 text-small"
