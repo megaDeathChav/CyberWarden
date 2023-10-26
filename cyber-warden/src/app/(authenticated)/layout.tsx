@@ -27,14 +27,12 @@ export default function RootLayout({
   }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} flex flex-col bg-gradient-to-t from-white via-gray-300 to-white dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-700 dark:to-gray-900`}>
+      <body className={`${inter.className} bg-gradient-to-t from-white via-gray-300 to-white dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-700 dark:to-gray-900`}>
         <Providers>
-          <div className="flex h-full w-full">
             <SidebarWithLogo />
-            <div className="h-screen w-full">
+            <div className="ml-[10rem]">
               {children}
             </div>
-          </div>
           {/* <FooterWithLogo /> */}
         </Providers>
       </body>

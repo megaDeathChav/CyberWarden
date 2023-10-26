@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   return (
-    <main className='flex flex-col items-center h-3/4'>
+    <main className='flex flex-col items-center h-3/4 w-full'>
         <div className='w-3/5 h-3/5 my-10'>
           <CarouselDefault />
         </div>

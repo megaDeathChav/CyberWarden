@@ -46,7 +46,7 @@ export function SidebarWithLogo() {
   };
 
   return (
-    <Card variant="gradient" className="rounded-none h-screen w-7/8 max-w-[20rem] shadow-2xl bg-gradient-to-t from-gray-100 via-gray-300 to-gray-100 shadow-black dark:shadow-white dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
+    <Card variant="gradient" className="rounded-none h-screen max-w-[20rem] bg-gray-600/30 fixed top-0 left-0 shadow-2xl bg-gradient-to-t from-gray-100 via-gray-300 to-gray-100 shadow-black dark:shadow-white dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
       <div className="mb-2 flex items-center gap-4 p-4">
         <img src="/assets/logo.png" alt="brand" className="h-14 w-14" /> 
         <Typography variant="h5" color="blue-gray" className="text-black dark:text-gray-200">
