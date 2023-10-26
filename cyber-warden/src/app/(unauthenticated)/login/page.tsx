@@ -25,15 +25,6 @@ export default function login(){
                   <label htmlFor="password" className="text-sm font-bold text-black block">Password</label>
                   <input type="password" id="password" name='password' className="w-full p-2 border border-gray-300 rounded mt-1" />
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input type="checkbox" id="rememberMe" className="h-4 w-4 text-blue-300 rounded" />
-                    <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-500 hover:text-gray-600">Remember me</label>
-                  </div>
-                  <div className="font-medium text-sm text-gray-500 hover:text-gray-600">
-                    <Link href='/forgotpass'>Forgot Password?</Link>
-                    </div>
-                </div>
                 <div>
                   {/* <Link href='/'> */}
                     <button type='submit' className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm">Proceed</button>
