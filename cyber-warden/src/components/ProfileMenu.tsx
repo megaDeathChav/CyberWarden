@@ -15,16 +15,6 @@ const profileMenuItems = [
     href: '#'
   },
   {
-    label: "Inbox",
-    icon: InboxArrowDownIcon,
-    href: '#'
-  },
-  {
-    label: "Help",
-    icon: LifebuoyIcon,
-    href: '#'
-  },
-  {
     label: "Sign Out",
     icon: PowerIcon,
     href: '/login'
