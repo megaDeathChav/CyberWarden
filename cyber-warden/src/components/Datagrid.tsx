@@ -246,7 +246,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {users.length} users</span>
+          <span className="text-default-400 text-small">Total {users.length} hosts</span>
           <label className="flex color-black items-center text-default-400 text-small">
             Rows per page:
             <select
@@ -329,7 +329,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={sortedItems}>
+      <TableBody emptyContent={"No hosts found"} items={sortedItems}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}

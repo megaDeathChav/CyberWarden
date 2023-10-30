@@ -32,7 +32,7 @@ export function ProfileMenu() {
         <Button
           variant="text"
           color="blue-gray"
-          className="flex justify-start items-center w-full gap-2 p-2 lg:ml-auto hover:bg-blue-200 dark:hover:bg-gray-600"
+          className="flex justify-start items-center w-full gap-2 p-2 lg:ml-auto hover:bg-blue-200 hover:dark:bg-purple-900"
         >
           <Avatar
             variant="circular"

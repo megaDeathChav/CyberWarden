@@ -27,10 +27,10 @@ export default function RootLayout({
   }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-gradient-to-t from-white via-gray-300 to-white dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-700 dark:to-gray-900`}>
+      <body className={`${inter.className} bg-gradient-to-t from-white via-gray-300 to-white dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-800 dark:to-gray-900`}>
         <Providers>
             <SidebarWithLogo />
-            <div className="ml-[10rem]">
+            <div className="ml-[16rem]">
               {children}
             </div>
           {/* <FooterWithLogo /> */}

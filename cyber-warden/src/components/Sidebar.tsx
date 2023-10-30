@@ -46,7 +46,7 @@ export function SidebarWithLogo() {
   };
 
   return (
-    <Card variant="gradient" className="rounded-none h-screen max-w-[20rem] bg-gray-600/30 fixed top-0 left-0 shadow-2xl bg-gradient-to-t from-gray-100 via-gray-300 to-gray-100 shadow-black dark:shadow-white dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
+    <Card variant="gradient" className="rounded-none h-screen max-w-[20rem] bg-gray-600/30 fixed top-0 left-0 shadow-2xl bg-gradient-to-t from-gray-100 via-gray-300 to-gray-100 shadow-black dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="mb-2 flex items-center gap-4 p-4">
         <img src="/assets/logo.png" alt="brand" className="h-14 w-14" /> 
         <Typography variant="h5" color="blue-gray" className="text-black dark:text-gray-200">
@@ -56,7 +56,7 @@ export function SidebarWithLogo() {
       <List>
         <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
         <div className="flex items-center">
-          <PresentationChartBarIcon className="h-5 w-5 text-blue-600 dark:text-gray-400" />
+          <PresentationChartBarIcon className="h-5 w-5 text-blue-600 dark:text-[#d946ef]" />
           <span className="ml-2 font-normal text-black dark:text-gray-200">
               Dashboard
          </span>
@@ -64,12 +64,12 @@ export function SidebarWithLogo() {
         </button>
 
         <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
-        <div className="flex items-center">
-          <NewspaperIcon className="h-5 w-5 text-blue-600 dark:text-gray-400" />
+        <Link href='/serverLogs' className="flex items-center">
+          <NewspaperIcon className="h-5 w-5 text-blue-600 dark:text-[#d946ef]" />
           <span className="ml-2 font-normal text-black dark:text-gray-200">
             Server Logs
           </span>
-       </div>
+        </Link>
         </button>
       </List>
       
@@ -108,12 +108,12 @@ export function SidebarWithLogo() {
           </ListItem>
         </Link> */}
       </List>
-      <Alert open={openAlert} className="mt-auto w-56 m-6" onClose={() => setOpenAlert(false)}>
-        <CubeTransparentIcon className="mb-4 h-12 w-12" />
-        <Typography variant="h6" className="mb-1">
+      <Alert open={openAlert} className="mt-auto w-56 m-6 dark:bg-white/60 dark:text-black" onClose={() => setOpenAlert(false)}>
+        <CubeTransparentIcon className="mb-4 h-12 w-12 dark:text-black" />
+        <Typography variant="h6" className="mb-1 dark:text-black">
           Welcome to Cyber Warden !
         </Typography>
-        <Typography variant="small" className="font-normal opacity-80">
+        <Typography variant="small" className="font-normal opacity-80 dark:text-black">
           The capabilities of this platform are at you fingertips...
         </Typography>
         <div className="mt-4 flex gap-3">
@@ -121,13 +121,13 @@ export function SidebarWithLogo() {
             as="a"
             href="#"
             variant="small"
-            className="font-medium opacity-80"
+            className="font-medium opacity-80 dark:text-black"
             onClick={() => setOpenAlert(false)}
           >
             Dismiss
           </Typography>
-          <Typography as="a" href="#" variant="small" className="font-medium">
-            I'm Excited
+          <Typography as="a" href="#" variant="small" className="font-medium dark:text-black">
+            I&apos;m Excited
           </Typography>
         </div>
       </Alert>

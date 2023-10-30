@@ -4,7 +4,7 @@ import BarGraph from '@/components/BarCharts';
 import PieGraph from '@/components/PieCharts';
 import { ComplexNavbar } from '@/components/Navbar';
 import Datagrid from '@/components/Datagrid';
-import { CarouselDefault } from '@/components/Carousel';
+import { CarouselDefault } from '@/app/(authenticated)/Carousel';
 import { DialogCustomAnimation } from '@/components/Dialoge';
 
 export default function Home() {
@@ -19,12 +19,12 @@ export default function Home() {
   }
 
   return (
-    <main className='flex flex-col items-center h-3/4 w-full'>
+    <main className='flex flex-col items-center min-h-screen w-full'>
         <div className='w-3/5 h-3/5 my-10'>
           <CarouselDefault />
         </div>
         
-        <div className='w-3/4 h-3/4'>
+        <div className='w-3/4 h-3/4 mb-unit-xl'>
           <Datagrid handleDialogOpen={handleDialogOpen}/>
           <DialogCustomAnimation open={open} handleOpen={handleDialogOpen} />
         </div>
