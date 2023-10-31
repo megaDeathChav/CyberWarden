@@ -16,7 +16,7 @@ export default function login(){
                 <p className="text-3xl font-extrabold text-black">Login </p>
                 <p className="text-sm font-bold text-gray-600">to Cyberwarden</p>
               </div>
-              <form action={userLoginWithPass} className="space-y-6">
+              <form action={() =>userLoginWithPass} className="space-y-6">
                 <div>
                   <label htmlFor="email" className="text-sm font-bold text-black block">Email</label>
                   <input type="text" name='email' id="email" className="w-full p-2 border border-gray-300 rounded mt-1" />

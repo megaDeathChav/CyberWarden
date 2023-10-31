@@ -20,13 +20,17 @@ import type { CardProps } from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
   NewspaperIcon,
-  ExclamationTriangleIcon
+  HomeModernIcon,
+  PencilSquareIcon,
+  ExclamationTriangleIcon,
 } from "@heroicons/react/24/solid";
 
 import {
   ChevronRightIcon,
   ChevronDownIcon,
   CubeTransparentIcon,
+  PencilIcon,
+  ShieldExclamationIcon,
   
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -55,17 +59,17 @@ export function SidebarWithLogo() {
       </div>
       <List>
         <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
-        <div className="flex items-center">
-          <PresentationChartBarIcon className="h-5 w-5 text-blue-600 dark:text-[#df8c8c]" />
+        <Link href='/' className="flex items-center">
+          <HomeModernIcon className="h-6 w-6 text-blue-600 dark:text-[#df8c8c]" />
           <span className="ml-2 font-normal text-black dark:text-gray-200">
               Dashboard
          </span>
-        </div>
+        </Link>
         </button>
 
         <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
         <Link href='/serverLogs' className="flex items-center">
-          <NewspaperIcon className="h-5 w-5 text-blue-600 dark:text-[#df8c8c]" />
+          <PencilSquareIcon className="h-6 w-6 text-blue-600 dark:text-[#df8c8c]" />
           <span className="ml-2 font-normal text-black dark:text-gray-200">
             Server Logs
           </span>
@@ -79,7 +83,7 @@ export function SidebarWithLogo() {
         </ListItem>
         <ListItem className='text-black hover:bg-blue-200 dark:text-gray-200 hover:dark:bg-purple-900'>
           <ListItemPrefix>
-            <ExclamationTriangleIcon className="h-5 w-5 text-yellow-900 dark:text-red-700" />
+            <ExclamationTriangleIcon className="h-7 w-7 text-yellow-900 dark:text-red-700" />
           </ListItemPrefix>
           Alerts
           <ListItemSuffix>

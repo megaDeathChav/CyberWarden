@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import BarGraph from '@/components/BarCharts';
 import PieGraph from '@/components/PieCharts';
 import { ComplexNavbar } from '@/components/Navbar';
-import Datagrid from '@/components/Datagrid';
+import { HostsTable } from '@/components/Datagrid';
 import { CarouselDefault } from '@/app/(authenticated)/Carousel';
 import { DialogCustomAnimation } from '@/components/Dialoge';
 
@@ -25,9 +25,9 @@ export default function Home() {
         </div>
         
         <div className='w-3/4 h-3/4 mb-unit-xl'>
-          <Datagrid handleDialogOpen={handleDialogOpen}/>
+          <HostsTable handleDialogOpen={handleDialogOpen}/>
           <DialogCustomAnimation open={open} handleOpen={handleDialogOpen} />
-        </div>
+        </div> 
     </main>
   );  
 }
