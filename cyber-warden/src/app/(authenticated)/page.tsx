@@ -7,28 +7,34 @@ import Datagrid from '@/components/Datagrid';
 import { CarouselDefault } from '@/app/(authenticated)/Carousel';
 import { DialogCustomAnimation } from '@/components/Dialoge';
 
+import { getServerSession } from "next-auth";
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
 export default function Home() {
-  const [open, setDialogOpen] = useState(false);
+   // const session = await getServerSession(authOptions);
 
-  const handleDialogOpen = () => setDialogOpen(!open);
 
-  const addHostsToDB = async () => {
-    const res = await fetch('http://localhost:3000/api/hosts');
-    const data = await res.json();
-    console.log(data);
-  }
+    const [open, setDialogOpen] = useState(false);
 
-  return (
-    <main className='flex flex-col items-center min-h-screen w-full'>
-        <div className='w-3/5 h-3/5 my-10'>
-          <CarouselDefault />
-        </div>
-        
-        <div className='w-3/4 h-3/4 mb-unit-xl'>
-          <Datagrid handleDialogOpen={handleDialogOpen}/>
-          <DialogCustomAnimation open={open} handleOpen={handleDialogOpen} />
-        </div>
-    </main>
-  );  
+    const handleDialogOpen = () => setDialogOpen(!open);
+
+    const addHostsToDB = async () => {
+        const res = await fetch('http://localhost:3000/api/hosts');
+        const data = await res.json();
+        console.log(data);
+    }
+
+    return (
+        <main className='flex flex-col items-center min-h-screen w-full'>
+            <div className='w-3/5 h-3/5 my-10'>
+                <CarouselDefault />
+            </div>
+
+            <div className='w-3/4 h-3/4 mb-unit-xl'>
+                <Datagrid handleDialogOpen={handleDialogOpen} />
+                <DialogCustomAnimation open={open} handleOpen={handleDialogOpen} />
+            </div>
+        </main>
+    );
 }
- 
+
