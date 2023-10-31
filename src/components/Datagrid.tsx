@@ -1,4 +1,6 @@
+
 import React from "react";
+
 
 import {
   Table,
@@ -18,15 +20,18 @@ import {
   Pagination,
   Selection,
   ChipProps,
-  SortDescriptor
+  SortDescriptor,
+  Spinner,
+  getKeyValue
 } from "@nextui-org/react";
 import {PlusIcon} from "@/icons/PlusIcon";
 import {VerticalDotsIcon} from "@/icons/VerticalDotsIcon";
 import {ChevronDownIcon} from "@/icons/ChevronDownIcon";
 import {SearchIcon} from "@/icons/SearchIcon";
-import {columns, users, statusOptions} from "@/data/data";
+import {columns, hosts, statusOptions, serverLogs} from "@/data/data";
 import {capitalize} from "@/utils/utils";
 import Image from "next/image";
+// import { getPageData } from "@/actions/serverActions";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   connected: "success",
@@ -36,13 +41,13 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
 const INITIAL_VISIBLE_COLUMNS = ["hostname", "ip", "os", "incidents", "status", "actions"];
 
 
-type User = typeof users[0];
+type Host = typeof hosts[0];
 
 type DatagridProps = {
   handleDialogOpen: () => void;
 };
 
-export default function Datagrid({handleDialogOpen}: DatagridProps) {
+export function HostsTable({handleDialogOpen}: DatagridProps) {
 
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
@@ -64,21 +69,21 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...users];
+    let filteredHosts = [...hosts];
 
     if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
+      filteredHosts = filteredHosts.filter((user) =>
         user.hostname.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredUsers = filteredUsers.filter((user) =>
+      filteredHosts = filteredHosts.filter((user) =>
         Array.from(statusFilter).includes(user.status),
       );
     }
 
-    return filteredUsers;
-  }, [users, filterValue, statusFilter]);
+    return filteredHosts;
+  }, [hosts, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -91,69 +96,69 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: User, b: User) => {
-      const first = a[sortDescriptor.column as keyof User] as number;
-      const second = b[sortDescriptor.column as keyof User] as number;
+    return [...items].sort((a: Host, b: Host) => {
+      const first = a[sortDescriptor.column as keyof Host] as number;
+      const second = b[sortDescriptor.column as keyof Host] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
+  const renderCell = React.useCallback((host: Host, columnKey: React.Key) => {
+    const cellValue = host[columnKey as keyof Host];
 
-  switch (columnKey) {
-      case "os":
-        return (
-          <div className="flex flex-col ">
-            <Image alt='OS Img' width={40} height={40} src={cellValue.toString().toLowerCase() === 'windows' ? '/assets/windows.png' : '/assets/linux.png'} />
-          </div>
-        );
-      case "hostname":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-          </div>
-        );
-      case "ip":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-          </div>
-        );
-      case "incidents":
-        return (
-          <div className="flex pl-6">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex justify-center items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem onClick={handleDialogOpen}>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
+    switch (columnKey) {
+        case "os":
+          return (
+            <div className="flex flex-col ">
+              <Image alt='OS Img' width={40} height={40} src={cellValue.toString().toLowerCase() === 'windows' ? '/assets/windows.png' : '/assets/linux.png'} />
+            </div>
+          );
+        case "hostname":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">{cellValue}</p>
+            </div>
+          );
+        case "ip":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">{cellValue}</p>
+            </div>
+          );
+        case "incidents":
+          return (
+            <div className="flex pl-6">
+              <p className="text-bold text-small capitalize">{cellValue}</p>
+            </div>
+          );
+        case "status":
+          return (
+            <Chip className="capitalize" color={statusColorMap[host.status]} size="sm" variant="flat">
+              {cellValue}
+            </Chip>
+          );
+        case "actions":
+          return (
+            <div className="relative flex justify-center items-center gap-2">
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button isIconOnly size="sm" variant="light">
+                    <VerticalDotsIcon className="text-default-300" />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu>
+                  <DropdownItem onClick={handleDialogOpen}>View</DropdownItem>
+                  <DropdownItem>Edit</DropdownItem>
+                  <DropdownItem>Delete</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          );
+        default:
+          return cellValue;
+      }
   }, []);
 
   const onNextPage = React.useCallback(() => {
@@ -246,7 +251,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {users.length} hosts</span>
+          <span className="text-default-400 text-small">Total {hosts.length} hosts</span>
           <label className="flex color-black items-center text-default-400 text-small">
             Rows per page:
             <select
@@ -267,7 +272,7 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
     visibleColumns,
     onSearchChange,
     onRowsPerPageChange,
-    users.length,
+    hosts.length,
     hasSearchFilter,
   ]);
 
@@ -339,3 +344,4 @@ export default function Datagrid({handleDialogOpen}: DatagridProps) {
     </Table>
   );
 }
+
