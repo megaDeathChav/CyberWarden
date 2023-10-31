@@ -29,12 +29,12 @@ dependencies:
   '@prisma/client':
     specifier: 5.5.2
     version: 5.5.2(prisma@5.5.2)
+  '@react-stately/data':
+    specifier: ^3.10.3
+    version: 3.10.3(react@18.2.0)
   '@supabase/supabase-js':
     specifier: ^2.38.1
     version: 2.38.1
-  '@types/react':
-    specifier: 18.2.21
-    version: 18.2.21
   '@types/react-dom':
     specifier: 18.2.7
     version: 18.2.7
@@ -94,6 +94,9 @@ devDependencies:
   '@types/node':
     specifier: 20.5.9
     version: 20.5.9
+  '@types/react':
+    specifier: 18.2.21
+    version: 18.2.21
   prisma:
     specifier: ^5.5.2
     version: 5.5.2
@@ -2486,6 +2489,16 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@react-stately/data@3.10.3(react@18.2.0):
+    resolution: {integrity: sha512-cC9mxCZU4N9GbdOB4g2/J8+W+860GvBd874to0ObSc/XOR4VbuIsxAFIabW5UwmJV+XaqqK4TUBG0C6YScXeWQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-types/shared': 3.21.0(react@18.2.0)
+      '@swc/helpers': 0.5.3
+      react: 18.2.0
+    dev: false
+
   /@react-stately/flags@3.0.0:
     resolution: {integrity: sha512-e3i2ItHbIa0eEwmSXAnPdD7K8syW76JjGe8ENxwFJPW/H1Pu9RJfjkCb/Mq0WSPN/TpxBb54+I9TgrGhbCoZ9w==}
     dependencies:
@@ -3002,7 +3015,6 @@ packages:
 
   /@types/prop-types@15.7.8:
     resolution: {integrity: sha512-kMpQpfZKSCBqltAJwskgePRaYRFukDkm1oItcAbC3gNELR20XIBcN9VRgg4+m8DKsTfkWeA4m4Imp4DDuWy7FQ==}
-    dev: false
 
   /@types/react-dom@18.2.7:
     resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
@@ -3022,11 +3034,9 @@ packages:
       '@types/prop-types': 15.7.8
       '@types/scheduler': 0.16.4
       csstype: 3.1.2
-    dev: false
 
   /@types/scheduler@0.16.4:
     resolution: {integrity: sha512-2L9ifAGl7wmXwP4v3pN4p2FLhD0O1qsJpvKmNin5VA8+UvNVb447UDaAEV6UdrkA+m/Xs58U1RFps44x6TFsVQ==}
-    dev: false
 
   /@types/websocket@1.0.7:
     resolution: {integrity: sha512-62Omr8U0PO+hgjLCpPnMsmjh2/FRwIGOktZHyYAUzooEJotwkXHMp7vCacdYi8haxBNOiw9bc2HIHI+b/MPNjA==}
@@ -3598,7 +3608,6 @@ packages:
 
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
-    dev: false
 
   /d3-array@3.2.4:
     resolution: {integrity: sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==}
