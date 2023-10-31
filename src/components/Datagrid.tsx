@@ -194,8 +194,8 @@ export function HostsTable({handleDialogOpen}: DatagridProps) {
 
   const topContent = React.useMemo(() => {
     return (
-      <div className="flex flex-col gap-4">
-        <div className="flex justify-between gap-3 items-end">
+      <div className="flex flex-col gap-4 ">
+        <div className="flex justify-between gap-3 items-end ">
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
@@ -203,9 +203,9 @@ export function HostsTable({handleDialogOpen}: DatagridProps) {
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
-            onValueChange={onSearchChange}
+            onValueChange={onSearchChange}  
           />
-          <div className="flex gap-3">
+          <div className="flex gap-3 ">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
@@ -293,7 +293,7 @@ export function HostsTable({handleDialogOpen}: DatagridProps) {
           total={pages}
           onChange={setPage}
         />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
+        <div className="hidden sm:flex w-[30%] justify-end gap-2 ">
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
             Previous
           </Button>
@@ -306,13 +306,20 @@ export function HostsTable({handleDialogOpen}: DatagridProps) {
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
   return (
+
     <Table
       aria-label="Example table with custom cells, pagination and sorting"
+      // style={{ backgroundColor: 'white' }}
       isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
       classNames={{
-        wrapper: "max-h-[382px]",
+        // th: "dark:bg-[#24344E]",
+        td: "dark:bg-[#141B29]",
+        wrapper: "max-h-[382px] dark:bg-[#141B29]",
+        table: 'dark:bg-[#141B29] dark:border-[#141B29]',
+        emptyWrapper: 'dark:bg-[#141B29]',
+        base: 'dark:bg-transparent',
       }}
       selectedKeys={selectedKeys}
       selectionMode="multiple"
@@ -322,19 +329,20 @@ export function HostsTable({handleDialogOpen}: DatagridProps) {
       onSelectionChange={setSelectedKeys}
       onSortChange={setSortDescriptor}
     >
-      <TableHeader columns={headerColumns}>
+      <TableHeader columns={headerColumns} className="dark:bg-[#24344E]">
         {(column) => (
           <TableColumn
             key={column.uid}
             align={column.uid === "actions" ? "center" : "start"}
-            className={`${column.uid === "actions" ? "text-center " : ''} ${column.uid === "os" ? "pl-6" : ''}`}
+            className={`${column.uid === "actions" ? "text-center " : ''} ${column.uid === "os" ? "pl-6" : ''} `}
             allowsSorting={column.sortable}
           >
             {column.name}
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No hosts found"} items={sortedItems}>
+      
+      <TableBody emptyContent={"No hosts found"} items={sortedItems} className="">
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
