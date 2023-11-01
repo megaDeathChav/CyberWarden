@@ -2,18 +2,11 @@
 
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import isValidEmail from '@/lib/validateEmail';
+import toast from 'react-hot-toast';
+import { login } from '@/lib/userAuthentication'
 
 export default function LoginWidget() {
-  const onSubmit = (e: FormData) => {
-    const email = e.get('email')?.toString();
-    const password = e.get('password')?.toString();
-
-    signIn('credentials', {
-      email,
-      password,
-      callbackUrl: '/',
-    });
-  };
 
   return (
     <div className=" w-full mx-auto mt-4 bg-white rounded-2xl p-8 borde border-gray-300">
@@ -22,7 +15,7 @@ export default function LoginWidget() {
         <p className="text-3xl font-extrabold text-black">Login </p>
         <p className="text-sm font-bold text-gray-600">to Cyberwarden</p>
       </div>
-      <form action={onSubmit} className="space-y-6">
+      <form action={login} className="space-y-6">
         <div>
           <label htmlFor="email" className="text-sm font-bold text-black block">
             Email
