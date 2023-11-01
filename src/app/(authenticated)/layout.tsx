@@ -2,7 +2,7 @@ import React from 'react';
 import './globals.css';
 import type { Metadata } from 'next'
 import { Providers } from './providers';
-
+import { Toaster } from 'react-hot-toast';
 
 import { SidebarWithLogo } from '@/components/Sidebar';
 
@@ -14,7 +14,7 @@ import { FooterWithLogo } from '@/components/Footer';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Cyber Warden',
+    title: 'Cyber Warden',
 }
 
 
@@ -22,20 +22,21 @@ export const metadata: Metadata = {
 // type Theme = 'light' | 'dark';
 export default function RootLayout({
     children,
-  }: {
+}: {
     children: React.ReactNode
-  }) {
-  return (
+}) {
+    return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-gray-300 dark:bg-[#1E2A3F]`}>
         <Providers>
             <SidebarWithLogo />
             <div className="ml-[16rem]">
               {children}
+              <Toaster position='top-right'/>
             </div>
           {/* <FooterWithLogo /> */}
         </Providers>
       </body>
     </html>
-  );
+    );
 }
