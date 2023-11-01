@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import { Providers } from './providers';
 import { Toaster } from 'react-hot-toast';
 
-
 import { SidebarWithLogo } from '@/components/Sidebar';
 
 // maybe experiment with fonts from here (ctrl + click) should take u to a file where the font names are defined
@@ -15,7 +14,7 @@ import { FooterWithLogo } from '@/components/Footer';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Cyber Warden',
+    title: 'Cyber Warden',
 }
 
 
@@ -23,10 +22,10 @@ export const metadata: Metadata = {
 // type Theme = 'light' | 'dark';
 export default function RootLayout({
     children,
-  }: {
+}: {
     children: React.ReactNode
-  }) {
-  return (
+}) {
+    return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-gray-300 dark:bg-[#1E2A3F]`}>
         <Providers>
@@ -39,5 +38,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+    );
 }

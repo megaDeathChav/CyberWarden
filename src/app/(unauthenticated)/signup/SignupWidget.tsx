@@ -1,18 +1,46 @@
 'use client';
 
 import { signIn, signOut } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
 
-export default function SignedUp() {
+
+export default function SignupWidget() {
     // write an onSubmit to get email and passwordOne fileds from the form
-    const onSubmit = (e: FormData) => {
-        const email = e.get("email")?.toString();
-        const password = e.get("passwordOne")?.toString();
+    const onSubmit = async (e: FormData) => {
+        const email = e.get("email")?.toString() || "";
+        const passwordOne = e.get("passwordOne")?.toString() || "";
+        const passwordTwo = e.get("passwordTwo")?.toString() || "";
 
-        signIn('credentials', {
-            email,
-            password,
-            callbackUrl: '/',
-        });
+        if (!isValidEmail(email)) {
+            return toast.error("Invalid email");
+        }
+
+
+
+        if (passwordOne !== passwordTwo) {
+            return toast.error("Passwords do not match");
+        }
+
+        if (passwordOne.length < 8) {
+            return toast.error("Password must be at least 8 characters");
+        }
+
+        try {
+            const res = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password: passwordOne }),
+            });
+
+            if (res.ok) {
+                signIn()
+            }
+
+        } catch (error) {
+
+            console.log("uh oh", error);
+        }
+
     }
 
 
@@ -26,11 +54,11 @@ export default function SignedUp() {
             <form action={onSubmit} className="space-y-6">
                 <div>
                     <label htmlFor="email" className="text-sm font-bold text-black block">Email</label>
-                    <input name='email' type="text" id="email" className="w-full p-2 border border-gray-300 rounded mt-1" />
+                    <input required name='email' type="text" id="email" className="w-full p-2 border border-gray-300 rounded mt-1" />
                 </div>
                 <div>
                     <label htmlFor="password" className="text-sm font-bold text-black block">Password</label>
-                    <input name='passwordOne' type="password" id="password" className="w-full p-2 border border-gray-300 rounded mt-1" />
+                    <input required name='passwordOne' type="password" id="passwordOne" className="w-full p-2 border border-gray-300 rounded mt-1" />
                     {/*Password Requirement*/}
                     <ul className="text-xs text-gray-600 list-disc list-inside dark:text-gray-400">
                         <li>
@@ -46,7 +74,7 @@ export default function SignedUp() {
                 </div>
                 <div>
                     <label htmlFor="password" className="text-sm font-bold text-black block">Confirm Password</label>
-                    <input type="passwordTwo" id="password" className="w-full p-2 border border-gray-300 rounded mt-1" />
+                    <input required name="passwordTwo" type="password" id="passwordTwo" className="w-full p-2 border border-gray-300 rounded mt-1" />
                 </div>
                 <div className="text-m flex justify-center space-x-1 items-center">
                     {/* <Link href=''> <div className="flex justify-center items-center">Create Account</div></Link> */}
@@ -62,4 +90,10 @@ export default function SignedUp() {
             </form>
         </div>
     )
+}
+
+function isValidEmail(email: string): boolean {
+    // Simple email validation, can be replaced with a more robust check
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
 }
