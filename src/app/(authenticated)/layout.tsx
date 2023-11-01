@@ -2,6 +2,7 @@ import React from 'react';
 import './globals.css';
 import type { Metadata } from 'next'
 import { Providers } from './providers';
+import { Toaster } from 'react-hot-toast';
 
 
 import { SidebarWithLogo } from '@/components/Sidebar';
@@ -32,6 +33,7 @@ export default function RootLayout({
             <SidebarWithLogo />
             <div className="ml-[16rem]">
               {children}
+              <Toaster position='top-right'/>
             </div>
           {/* <FooterWithLogo /> */}
         </Providers>

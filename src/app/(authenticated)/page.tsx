@@ -6,7 +6,7 @@ import { ComplexNavbar } from '@/components/Navbar';
 import { HostsTable } from '@/components/Datagrid';
 import { CarouselDefault } from '@/app/(authenticated)/Carousel';
 import { DialogCustomAnimation } from '@/components/Dialoge';
-
+import toast from 'react-hot-toast';
 import { getServerSession } from "next-auth";
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
