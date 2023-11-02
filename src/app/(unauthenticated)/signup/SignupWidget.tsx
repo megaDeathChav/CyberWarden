@@ -21,6 +21,11 @@ export default function SignupWidget() {
                     <label htmlFor="password" className="text-sm font-bold text-black block">Password</label>
                     <input required name='passwordOne' type="password" id="passwordOne" className="w-full p-2 border border-gray-300 rounded mt-1" />
                     {/*Password Requirement*/}
+
+                </div>
+                <div>
+                    <label htmlFor="password" className="text-sm font-bold text-black block">Confirm Password</label>
+                    <input required name="passwordTwo" type="password" id="passwordTwo" className="w-full p-2 border border-gray-300 rounded mt-1" />
                     <ul className="text-xs text-gray-600 list-disc list-inside dark:text-gray-400">
                         <li>
                             At least 10 characters
@@ -32,10 +37,6 @@ export default function SignupWidget() {
                             At least one special character, e.g., ! @ # ?
                         </li>
                     </ul>
-                </div>
-                <div>
-                    <label htmlFor="password" className="text-sm font-bold text-black block">Confirm Password</label>
-                    <input required name="passwordTwo" type="password" id="passwordTwo" className="w-full p-2 border border-gray-300 rounded mt-1" />
                 </div>
                 <div className="text-m flex justify-center space-x-1 items-center">
                     {/* <Link href=''> <div className="flex justify-center items-center">Create Account</div></Link> */}

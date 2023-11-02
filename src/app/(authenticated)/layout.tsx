@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-300 dark:bg-[#1E2A3F]`}>
         <Providers>
             <SidebarWithLogo />
-            <div className="ml-[16rem]">
+            <div className="ml-[15rem]">
               {children}
               <Toaster position='top-right'/>
             </div>
