@@ -1,13 +1,9 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import isValidEmail from '@/lib/validateEmail';
-import toast from 'react-hot-toast';
-import { login } from '@/lib/userAuthentication'
+import { login } from '@/lib/userAuthentication';
 
 export default function LoginWidget() {
-
   return (
     <div className=" w-full mx-auto mt-4 bg-white rounded-2xl p-8 borde border-gray-300">
       {/* Stylized text **/}
