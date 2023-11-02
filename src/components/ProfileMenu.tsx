@@ -3,6 +3,7 @@ import { MenuHandler, Button, Avatar, MenuList, Typography, Menu, MenuItem } fro
 import Link from "next/link";
 import React from "react";
 import { signOut } from "next-auth/react";
+import { logout } from '@/lib/userAuthentication';
 
 const profileMenuItems = [
     {
@@ -52,7 +53,7 @@ export function ProfileMenu() {
                     />
                 </Button>
             </MenuHandler>
-            <MenuList className="p-2 dark:bg-gradient-to-b dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
+            <MenuList className="p-2 dark:bg-[#8C3F9B]">
                 {profileMenuItems.map(({ label, icon, href }, key) => {
                     const isLastItem = key === profileMenuItems.length - 1;
                     if (!isLastItem) {
@@ -60,8 +61,8 @@ export function ProfileMenu() {
                             <Link href={href} key={label}>
                                 <MenuItem
                                     onClick={closeMenu}
-                                    className={`flex items-center gap-2 rounded dark:hover:bg-gray-600 ${isLastItem
-                                        ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 dark:hover:bg-red-500/10 dark:focus:bg-red-500/10 dark:active:bg-red-500/10"
+                                    className={`flex items-center gap-2 rounded hover:dark:bg-purple-900 border-none ${isLastItem
+                                        ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 dark:hover:bg-red-900 dark:focus:bg-red-900 dark:active:bg-red-900"
                                         : ""
                                         }`}
                                 >
@@ -84,10 +85,10 @@ export function ProfileMenu() {
 
                         return (
                             <MenuItem
-                                onClick={signOut}
+                                onClick={logout}
                                 key={label}
                                 className={`flex items-center gap-2 rounded dark:hover:bg-gray-600 ${isLastItem
-                                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 dark:hover:bg-red-500/10 dark:focus:bg-red-500/10 dark:active:bg-red-500/10"
+                                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 dark:hover:bg-red-900/60 dark:focus:bg-red-900/60 dark:active:bg-red-900/60"
                                     : ""
                                     }`}
                             >
@@ -104,8 +105,6 @@ export function ProfileMenu() {
                                     {label}
                                 </Typography>
                             </MenuItem>
-
-
                         );
                     }
                 })}

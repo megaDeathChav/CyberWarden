@@ -63,7 +63,7 @@ export const authOptions: NextAuthOptions = {
         jwt: ({ token, user }) => {
             console.log('jwt callback', { token, user })
             if (user) {
-                const u = user as unkown as any
+                const u = user as unknown as any
                 return {
                     ...token,
                     id: user.id,

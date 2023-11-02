@@ -60,7 +60,7 @@ export function SidebarWithLogo() {
       <List>
         <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
         <Link href='/' className="flex items-center">
-          <HomeModernIcon className="h-6 w-6 text-blue-600 dark:text-[#df8c8c]" />
+          <HomeModernIcon className="h-6 w-6 text-blue-600 dark:text-[#1D9FE4]" />
           <span className="ml-2 font-normal text-black dark:text-gray-200">
               Dashboard
          </span>
@@ -69,7 +69,7 @@ export function SidebarWithLogo() {
 
         <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
         <Link href='/serverLogs' className="flex items-center">
-          <PencilSquareIcon className="h-6 w-6 text-blue-600 dark:text-[#df8c8c]" />
+          <PencilSquareIcon className="h-6 w-6 text-blue-600 dark:text-[#1D9FE4]" />
           <span className="ml-2 font-normal text-black dark:text-gray-200">
             Server Logs
           </span>
