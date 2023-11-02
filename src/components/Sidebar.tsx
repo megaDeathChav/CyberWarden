@@ -15,6 +15,8 @@ import {
   Alert,
 } from "@material-tailwind/react";
 
+import { GiScythe } from 'react-icons/gi'
+
 import type { CardProps } from "@material-tailwind/react";
 
 import {
@@ -39,41 +41,54 @@ import ThemeSwitcher from "./ThemeSwitcher";
 import { DialogCustomAnimation } from "./Dialoge";
 
 export function SidebarWithLogo() {
-  const [open, setOpen] = React.useState(0);
-  const [openAlert, setOpenAlert] = React.useState(true);
+  // const [open, setOpen] = React.useState(0);
+  // const [openAlert, setOpenAlert] = React.useState(true);
 
-  const [tableOpen, setTableOpen] = React.useState(false);
-  const handleTableOpen = () => setTableOpen(!tableOpen);
+  // const [tableOpen, setTableOpen] = React.useState(false);
+  // const handleTableOpen = () => setTableOpen(!tableOpen);
  
-  const handleOpen = (value: number) => {
-    setOpen(open === value ? 0 : value);
-  };
+  // const handleOpen = (value: number) => {
+    // setOpen(open === value ? 0 : value);
+  // };
 
   return (
     <Card variant="gradient" className="rounded-none h-screen max-w-[20rem] bg-gray-600/30 fixed top-0 left-0 shadow-2xl bg-gray-200 shadow-black dark:bg-[#141B29]">
-      <div className="mb-2 flex items-center gap-4 p-4">
+      <div className=" flex items-center gap-4 p-4">
         <img src="/assets/logo.png" alt="brand" className="h-14 w-14" /> 
         <Typography variant="h5" color="blue-gray" className="text-black dark:text-gray-200">
           Cyber Warden
         </Typography>
       </div>
-      <List>
+      <div className="flex justify-center my-2">
+        <div className="w-5/6 h-1 border-t-1 border-blue-gray-300 dark:border-blue-gray-700 " />
+      </div>
+      <List className="flex gap-y-3">
         <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
-        <Link href='/' className="flex items-center">
-          <HomeModernIcon className="h-6 w-6 text-blue-600 dark:text-[#1D9FE4]" />
-          <span className="ml-2 font-normal text-black dark:text-gray-200">
-              Dashboard
-         </span>
-        </Link>
+          <Link href='/' className="flex items-center">
+            <HomeModernIcon className="h-6 w-6 text-blue-600 dark:text-[#1D9FE4]" />
+            <span className="ml-2 font-normal text-black dark:text-gray-200">
+                Dashboard
+           </span>
+          </Link>
+        </button>
+
+
+        <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
+          <Link href='/scriptingHub' className="flex items-center">
+            <GiScythe className="h-6 w-6 text-blue-600 dark:text-[#1D9FE4]" />
+            <span className="ml-2 font-normal text-black dark:text-gray-200">
+              Scripting Hub
+            </span>
+          </Link>
         </button>
 
         <button className="py-2 px-4 rounded-md hover:bg-blue-100 hover:dark:bg-purple-900 w-full text-left">
-        <Link href='/serverLogs' className="flex items-center">
-          <PencilSquareIcon className="h-6 w-6 text-blue-600 dark:text-[#1D9FE4]" />
-          <span className="ml-2 font-normal text-black dark:text-gray-200">
-            Server Logs
-          </span>
-        </Link>
+          <Link href='/serverLogs' className="flex items-center">
+            <PencilSquareIcon className="h-6 w-6 text-blue-600 dark:text-[#1D9FE4]" />
+            <span className="ml-2 font-normal text-black dark:text-gray-200">
+              Server Logs
+            </span>
+          </Link>
         </button>
       </List>
       
@@ -112,7 +127,7 @@ export function SidebarWithLogo() {
           </ListItem>
         </Link> */}
       </List>
-      <Alert open={openAlert} className="mt-auto w-56 m-6 dark:bg-white/60 dark:text-black" onClose={() => setOpenAlert(false)}>
+      {/* <Alert open={openAlert} className="mt-auto w-56 m-6 dark:bg-white/60 dark:text-black" onClose={() => setOpenAlert(false)}>
         <CubeTransparentIcon className="mb-4 h-12 w-12 dark:text-black" />
         <Typography variant="h6" className="mb-1 dark:text-black">
           Welcome to Cyber Warden !
@@ -134,7 +149,7 @@ export function SidebarWithLogo() {
             I&apos;m Excited
           </Typography>
         </div>
-      </Alert>
+      </Alert> */}
     </Card>
   );
 }

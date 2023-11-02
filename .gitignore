@@ -34,6 +34,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+/prisma/migrations
+
 # whatever Jaylon told me to do (Bruce)
-package-lock.json
 .env
