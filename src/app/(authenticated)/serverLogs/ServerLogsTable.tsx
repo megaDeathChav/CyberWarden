@@ -66,8 +66,11 @@ export function ServerLogsTable() {
         ) : null
       }
       classNames={{
-        base: "max-h-[520px]",
-        table: "min-h-[420px]",
+        td: "dark:bg-[#141B29]",
+        wrapper: "max-h-[382px] dark:bg-[#141B29]",
+        table: 'min-h-[420px] dark:bg-[#141B29] dark:border-[#141B29]',
+        emptyWrapper: 'dark:bg-[#141B29]',
+        base: 'max-h-[520px] dark:bg-transparent',
       }}
     >
       <TableHeader>
