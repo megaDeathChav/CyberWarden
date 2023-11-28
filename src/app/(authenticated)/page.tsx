@@ -1,28 +1,28 @@
 'use client'
-import { useState, useEffect } from 'react';
-import BarGraph from '@/components/BarCharts';
-import PieGraph from '@/components/PieCharts';
-import { ComplexNavbar } from '@/components/Navbar';
-import { HostsTable } from '@/components/Datagrid';
+// import BarGraph from '@/components/BarCharts';
+// import PieGraph from '@/components/PieCharts';
 import { CarouselDefault } from '@/app/(authenticated)/Carousel';
-import { DialogCustomAnimation } from '@/components/Dialoge';
-import toast from 'react-hot-toast';
-import { getServerSession } from "next-auth";
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { HostsTable } from '@/app/(authenticated)/HostsTable';
+import { DialogCustomAnimation } from '@/app/(authenticated)/Dialoge';
+import { useState } from 'react';
+// import { enumerateNetwork } from '@/lib/enumerateNetwork'
+import { Button } from '@nextui-org/react';
+import { toast } from 'react-hot-toast';
 
-export default function Home() {
+
+export default function App() {
    // const session = await getServerSession(authOptions);
+  const [open, setDialogOpen] = useState(false);   
+
+//   const handleDialogOpen = () => setDialogOpen(!open);     
+//   const addHostsToDB = async () => {
+//       const res = await fetch('http://localhost:3000/api/hosts');
+//       const data = await res.json();
+//       console.log(data);
+//   }
 
 
-    const [open, setDialogOpen] = useState(false);
 
-    const handleDialogOpen = () => setDialogOpen(!open);
-
-    const addHostsToDB = async () => {
-        const res = await fetch('http://localhost:3000/api/hosts');
-        const data = await res.json();
-        console.log(data);
-    }
 
     return (
         <main className='flex flex-col items-center min-h-screen w-full'>
@@ -30,10 +30,12 @@ export default function Home() {
                 <CarouselDefault />
             </div>
 
-            <div className='w-3/4 h-3/4 mb-unit-x'>
-                <HostsTable handleDialogOpen={handleDialogOpen} />
-                <DialogCustomAnimation open={open} handleOpen={handleDialogOpen} />
+            <div className='w-3/4 h-3/4 mb-unit-xl'>
+                <HostsTable />
             </div>
+
+
+
         </main>
     );
 }

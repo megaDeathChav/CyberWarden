@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { ServerLogsTable } from './ServerLogsTable'
+import { ServerLogsTable } from '@/components/ServerLogsTable'
 
 function serverLogs() {
   return (

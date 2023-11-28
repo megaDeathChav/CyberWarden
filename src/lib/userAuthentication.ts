@@ -69,12 +69,10 @@ export const signUp = async (e: FormData) => {
             {
                 toast.error("Sign up failed!\nEmail already exists...")
             }
-
         } catch (error) {
-
-            toast.error("Dev might want to check this out :)");
-        }
-};
+            toast.error("Sign up failed!\nEmail already exists...")
+        } 
+}
 
 export const logout = async () => {
 

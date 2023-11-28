@@ -1,7 +1,8 @@
 'use client';
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Radio, RadioGroup, Chip} from "@nextui-org/react";
 import ScripterModal from '@/components/ScripterModal';
-import { Key } from "react";
+import { Key, useState } from "react";
+import { useScriptingHubStore } from "@/store/ScriptingHubStore";
 
 type Column = {
     key: string;
@@ -9,7 +10,7 @@ type Column = {
 };
 
 type Row = {
-    key: string;
+    id: number;
     scriptName: string;
     category: string;
     risk: string;
@@ -19,6 +20,7 @@ type Row = {
 type ScriptingHubTableProps = {
     columns: Column[];
     rows: Row[];
+    os: string;
 };
 
 type riskMapType = {
@@ -55,11 +57,22 @@ function renderColumn(item: Row, columnKey: Key) {
 }
 
 
-export default function ScriptingHubTable({columns, rows}: ScriptingHubTableProps) {
+export default function AnsiblePlaybooksTable({columns, rows, os}: ScriptingHubTableProps) {
+
+  const [selectedKeysLinuxPlaybooks, setSelectedKeysLinuxPlaybooks, selectedKeysWindowsPlaybooks, setSelectedKeysWindowsPlaybooks] =   useScriptingHubStore((state) => [
+    state.selectedKeysLinuxPlaybooks,
+    state.setSelectedKeysLinuxPlaybooks,
+    state.selectedKeysWindowsPlaybooks,
+    state.setSelectedKeysWindowsPlaybooks,
+  ])
+
 
   return (
     <div className="flex flex-col gap-3">
       <Table 
+        disallowEmptySelection
+        selectedKeys={os.toLowerCase() === 'linux' ? selectedKeysLinuxPlaybooks : selectedKeysWindowsPlaybooks}
+        onSelectionChange={os.toLowerCase() === 'linux' ? setSelectedKeysLinuxPlaybooks as any : setSelectedKeysWindowsPlaybooks as any}
         aria-label="Selection behavior table example with dynamic content"
         selectionMode="multiple"
         selectionBehavior={'toggle'}
@@ -67,7 +80,7 @@ export default function ScriptingHubTable({columns, rows}: ScriptingHubTableProp
           // th: "dark:bg-[#24344E]",
           td: "dark:bg-[#141B29]",
           wrapper: "max-h-[382px] dark:bg-[#141B29]",
-          table: 'dark:bg-[#141B29] dark:border-[#141B29]',
+          table: 'w-unit-9xl h-unit-9xl dark:bg-[#141B29] dark:border-[#141B29]',
           emptyWrapper: 'dark:bg-[#141B29]',
           base: 'dark:bg-transparent',
         }}
@@ -81,7 +94,7 @@ export default function ScriptingHubTable({columns, rows}: ScriptingHubTableProp
         </TableHeader>
         <TableBody items={rows}>
           {(item) => (
-            <TableRow key={item.key}>
+            <TableRow key={item.id}> 
               {(columnKey) => 
                 <TableCell>
                     {
