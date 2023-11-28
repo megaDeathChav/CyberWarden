@@ -75,9 +75,12 @@ export function ServerLogsTable() {
       }}
     >
       <TableHeader>
+        <TableColumn key="date">Date</TableColumn>
+        <TableColumn key="time">Time</TableColumn>
         <TableColumn key="name">Name</TableColumn>
-        <TableColumn key="timestamp">Time Stamp</TableColumn>
         <TableColumn key="status">Status</TableColumn>
+        <TableColumn key="module">Module</TableColumn>
+        <TableColumn key="content">Log Content</TableColumn>
       </TableHeader>
       <TableBody
         isLoading={isLoading}
