@@ -1,6 +1,5 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import isValidEmail from '@/lib/validateEmail';
 import toast from 'react-hot-toast';
@@ -11,7 +10,6 @@ import { fadeIn } from "@/components/variants";
 
 
 export default function LoginWidget() {
-
   return (
     <motion.div 
       variants={fadeIn('up', 0.3)}
