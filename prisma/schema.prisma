@@ -61,4 +61,17 @@ model Incident {
     createdAt   DateTime  @default(now())
 }
 
+// Add this model to your schema.prisma file
+
+model ServerLog {
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime @default(now())
+  user      String
+  action    String
+  success   Boolean
+  module    String
+  message   String
+}
+
+
 

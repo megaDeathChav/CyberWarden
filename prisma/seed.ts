@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { hash } from 'bcrypt'
 
 const prisma = new PrismaClient()
-
+// prisma.serverLog.create
 async function main() {
     const dummyHosts = [
         {
@@ -142,6 +142,11 @@ async function main() {
         },
     ];
 
+    // const dummyLogs = [
+    //     {
+    //         hostname: 'example1.com',
+    //         ip: 
+    //     }
 
     for (const hostData of dummyHosts) {
         await prisma.host.create({
