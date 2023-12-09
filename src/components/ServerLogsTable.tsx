@@ -4,7 +4,9 @@ import { Button, Chip, Spinner, Table, TableBody, TableCell, TableColumn, TableH
 import { useAsyncList } from "@react-stately/data";
 import React from "react";
 
+
 type ServerLog = {
+  id: number;
   name: string;
   timestamp: string;
   status: 'signed in' | 'signed out';
@@ -25,11 +27,32 @@ function getPageData(pageNumber: number, pageSize = PAGE_SIZE) {
 
 export function ServerLogsTable() {
 
+  const [logs, setLogs] = React.useState([]) //
   const [page, setPage] = React.useState(1);
   const [isLoading, setIsLoading] = React.useState(true);
 
+  React.useEffect(() => { //
+    const fetchLogs = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`/api/v1/logs/getLogs?page=${page}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch logs');
+        }
+        const data = await response.json();
+        setLogs(data); // Set the fetched data into logs state
+      } catch (error) {
+        // Handle error (e.g., show a toast notification)
+        console.error('Error fetching logs:', error);
+      }
+      setIsLoading(false);
+    };
+
+    fetchLogs();
+  }, [page]);
+
   let list = useAsyncList({
-    async load({signal, cursor}) {
+    async load({ signal, cursor }) {
       if (cursor) {
         setPage((prev) => prev + 1);
       }
@@ -75,25 +98,28 @@ export function ServerLogsTable() {
       }}
     >
       <TableHeader>
+        <TableColumn key="date">Date</TableColumn>
+        <TableColumn key="time">Time</TableColumn>
         <TableColumn key="name">Name</TableColumn>
-        <TableColumn key="timestamp">Time Stamp</TableColumn>
         <TableColumn key="status">Status</TableColumn>
+        <TableColumn key="module">Module</TableColumn>
+        <TableColumn key="content">Log Content</TableColumn>
       </TableHeader>
       <TableBody
         isLoading={isLoading}
-        items={list.items as ServerLog[]}
+        items={logs}
         loadingContent={<Spinner label="Loading..." />}
-        >
+      >
         {(item: ServerLog) => (
           <TableRow key={item.name}>
-            { (columnKey) => 
+            {(columnKey) =>
               <TableCell>
                 {
-                  columnKey === "status" ? 
+                  columnKey === "status" ?
                     <Chip className="capitalize" color={item.status === 'signed in' ? "success" : "danger"} size="sm" variant="flat">
                       {item.status}
                     </Chip>
-                  :
+                    :
                     getKeyValue(item, columnKey)
 
                 }

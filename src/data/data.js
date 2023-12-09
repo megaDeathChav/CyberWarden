@@ -55,7 +55,7 @@ const hosts = [
 ]
 
 const serverLogs = [
-  {name: "Alice", timestamp: "2023-10-18T09:00:00Z", status: "signed in"},
+  {name: "Alice", date:" November", time: "2023-10-18T09:00:00Z", status: "signed in", module: "Login-Page", content: "Jaylon"},
   {name: "Bob", timestamp: "2023-10-18T09:05:00Z", status: "signed in"},
   {name: "Charlie", timestamp: "2023-10-18T09:10:00Z", status: "signed out"},
   {name: "David", timestamp: "2023-10-18T09:15:00Z", status: "signed in"},

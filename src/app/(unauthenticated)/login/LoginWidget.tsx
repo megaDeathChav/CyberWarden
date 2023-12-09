@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/components/variants";
 
 
-
 export default function LoginWidget() {
   return (
     <motion.div 

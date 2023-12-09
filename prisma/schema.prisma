@@ -127,6 +127,19 @@ model Volume {
   container    Container @relation(fields: [containerId], references: [id])
 }
 
+// Add this model to your schema.prisma file
+
+model ServerLog {
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime @default(now())
+  user      String
+  action    String
+  success   Boolean
+  module    String
+  message   String
+}
+
+
 
 model UserAccount {
   id        Int       @id @default(autoincrement())
