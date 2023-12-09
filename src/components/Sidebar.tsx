@@ -9,36 +9,21 @@ import {
   ListItemPrefix,
   ListItemSuffix,
   Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-  Alert,
 } from "@material-tailwind/react";
 
 import { GiScythe } from 'react-icons/gi'
 
-import type { CardProps } from "@material-tailwind/react";
 
 import {
-  PresentationChartBarIcon,
-  NewspaperIcon,
   HomeModernIcon,
   PencilSquareIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/solid";
 
-import {
-  ChevronRightIcon,
-  ChevronDownIcon,
-  CubeTransparentIcon,
-  PencilIcon,
-  ShieldExclamationIcon,
-  
-} from "@heroicons/react/24/outline";
+
 import Link from "next/link";
 import { ProfileMenu } from './ProfileMenu'; 
 import ThemeSwitcher from "./ThemeSwitcher";
-// import { DialogCustomAnimation } from "../app/(authenticated)/Dialoge";
 
 export function SidebarWithLogo() {
   // const [open, setOpen] = React.useState(0);
@@ -52,7 +37,7 @@ export function SidebarWithLogo() {
   // };
 
   return (
-    <Card variant="gradient" className="rounded-none h-screen max-w-[20rem] bg-gray-600/30 fixed top-0 left-0 shadow-2xl bg-gray-200 shadow-black dark:bg-[#141B29]">
+    <Card variant="gradient" className=" h-screen max-w-[20rem] bg-gray-600/30 fixed top-0 left-0 shadow-2xl bg-gray-200 shadow-black dark:bg-[#141B29] rounded-md">
       <div className=" flex items-center gap-4 p-4 pt-6">
         <img src="/assets/logo.png" alt="brand" className="h-12 w-12" /> 
         <Typography variant="h5" color="blue-gray" className="text-black dark:text-gray-200">

@@ -1,34 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# XDR System Application
+
+## Overview
+
+This application is an XDR (Extended Detection and Response) system designed to connect to remote machines, collect system statistics, and run Ansible playbooks remotely. 
+
+**Note:** The project is currently in development. Not all features are fully implemented or operational.
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to set up and start the server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+### Prerequisites
+
+1. Ensure that you have `Node.js` installed on your system.
+2. `Docker` is required for using the backend database.
+
+### Installation
+
+1. Clone the repository:
+
+`git clone https://github.com/megaDeathChav/Cyber-Warden.git -b front-end`
+
+2. Install the necessary packages:
+
+`npm i`
+
+
+### Database Setup
+
+1. Run the `startup.sh` script to set up Docker containers. On Linux/Mac:
+
+`bash startup.sh`
+
+For Windows, execute each command in the script one by one.
+
+### Environment Configuration
+
+Create two environment files in the root of the project:
+
+1. `.env` file:
+
+`DATABASE_URL="postgresql://admin:password123@localhost:5432/test"`
+
+2. `.env.local` file:
+
+```
+NEXTAUTH_SECRET=556ae13e18469af82782c526c368075ce62789580480de7942d4986696b8ec3c
+NEXTAUTH_URL=http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building and Running the Application
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Build the project:
 
-## Learn More
+`npm run build`
 
-To learn more about Next.js, take a look at the following resources:
+2. Start the project in production mode:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`npm run start`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Note:** As the project evolves, additional setup steps or changes might be necessary. Please refer to the latest documentation for updates.
+ 

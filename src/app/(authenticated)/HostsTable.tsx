@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 
 import {
@@ -14,31 +15,28 @@ import {
     DropdownMenu,
     DropdownItem,
     Chip,
-    User,
     Pagination,
     Selection,
     ChipProps,
     SortDescriptor,
-    Spinner,
-    getKeyValue,
     Tooltip
 } from "@nextui-org/react";
-import { PlusIcon } from "@/icons/PlusIcon";
-import { VerticalDotsIcon } from "@/icons/VerticalDotsIcon";
 import { ChevronDownIcon } from "@/icons/ChevronDownIcon";
 import { SearchIcon } from "@/icons/SearchIcon";
-import { columns, statusOptions, serverLogs } from "@/data/data";
+import { columns, statusOptions } from "@/data/data";
 import { capitalize } from "@/utils/utils";
 import Image from "next/image";
 // import { getPageData } from "@/actions/serverActions";
-import { Host, Status } from "@prisma/client";
-import { DialogCustomAnimation } from "./Dialoge";
-import { EyeIcon, InformationCircleIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { Edit } from "@mui/icons-material";
+import { Host as PrismaHost, OS } from '@prisma/client';
+import { EyeIcon, InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 import { fetchScanResults } from "@/lib/enumerateNetwork";
 import { addHostToDB } from '@/lib/addToDB'
-import { useHostsStore } from "@/store/HostsStore";
+// import revalidateHost from '@/lib/actions'
+import revalidate from '@/lib/actions'
+import { revalidatePath } from "next/cache";
+import { useHostsStore } from '@/store/HostsStore';
+import Link from "next/link";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
     UP: "success",
@@ -47,11 +45,17 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
 
 const INITIAL_VISIBLE_COLUMNS = ["hostname", "ip", "os", "incidents", "status", "actions"];
 
-
+type Host = PrismaHost & {
+  os?: OS;
+};
 
 type DatagridProps = {
     handleDialogOpen: () => void;
 };
+
+interface HostsTableProps {
+  hosts: Host[];
+}
 
 // export function HostsTable({ handleDialogOpen }: DatagridProps) {
 export function HostsTable() {
@@ -66,20 +70,54 @@ export function HostsTable() {
         direction: "ascending",
     });
 
+    // const [refetchCounter, setRefetchCounter] = React.useState(0);
+
     const [refetchCounter, setRefetchCounter, hosts, fetchHosts] = useHostsStore((state) => [
         state.refetchCounter, 
         state.setRefetchCounter,
         state.hosts,
         state.fetchHosts,
-    ])
+    ]);
 
-    const [open, setDialogOpen] = useState(false);
+    const [timeRefetched, setTimeRefetched] = useState(Date.now());
+
+function getTimeDifference(timeRefetched: number) {
+    const currentTime = Date.now();
+    const timeDifference = currentTime - timeRefetched; // Difference in milliseconds
+
+    // Convert to seconds and format to two decimal places
+    const timeInSeconds = (timeDifference / 1000).toFixed(2);
+
+    return parseFloat(timeInSeconds);
+}
+
 
     useEffect(() => {
+        // console.log('Refetch Counter updated to: ', refetchCounter);
+        const timeDifference = getTimeDifference(timeRefetched);
 
+        // initial refetch condition
+        if (refetchCounter === 0) {
+            fetchHosts();
+        }
 
-        fetchHosts();
-    }, [refetchCounter, fetchHosts]);
+        // check if enough time has passed to revalidate data
+        if (timeDifference >= 10) {
+            fetchHosts();
+            setTimeRefetched(Date.now())
+            toast.success('Revalidated Host Data!');
+        }
+        // prevent toast from popping up if it has been less than half a second since last 
+        // validation
+        else if (timeDifference > 1 && timeDifference < 10) {
+            const timeLeft = (10 - timeDifference).toFixed(2);
+
+            toast.error(`You must wait ${timeLeft} more seconds before revalidating...` )
+        }
+
+    }, [fetchHosts, refetchCounter, timeRefetched])
+
+    const [open, setDialogOpen] = useState(false);
 
 
     const [page, setPage] = React.useState(1);
@@ -132,27 +170,30 @@ export function HostsTable() {
     const renderCell = React.useCallback((host: Host, columnKey: React.Key) => {
         const cellValue = host[columnKey as keyof Host];
         
-        const handleDialogOpen = () => setDialogOpen(!open);
+        // const handleDialogOpen = () => setDialogOpen(!open);
+        if (columnKey === "os") {
+            const osName = host.os?.name || 'unknown'; // Fallback to 'unknown' if os or os.name is undefined
+            let imgSrc = '/assets/router.png'; // Default image
+
+            if (osName.toLowerCase() === 'windows') {
+                imgSrc = '/assets/windows.png';
+            } else if (osName.toLowerCase() === 'linux') {
+                imgSrc = '/assets/linux.png';
+            }
+
+            return (
+                <div className="flex flex-col">
+                    <Image
+                        alt='OS Img'
+                        width={40}
+                        height={40}
+                        src={imgSrc}
+                    />
+                </div>
+            );
+        }
+        
         switch (columnKey) {
-            case "os":
-                return (
-                    <div className="flex flex-col">
-                        <Image
-                            alt='OS Img'
-                            width={40}
-                            height={40}
-                            src={
-                                typeof cellValue === 'string' ?
-                                    (cellValue.toLowerCase() === 'windows'
-                                        ? '/assets/windows.png'
-                                        : cellValue.toLowerCase() === 'linux'
-                                            ? '/assets/linux.png'
-                                            : '/assets/router.png') // Replace 'other' with the third option
-                                : '/assets/router.png' // Replace with appropriate source for non-string cellValue
-                            }
-                        />
-                    </div>
-                );
             case "hostname":
                 return (
                     <div className="flex flex-col">
@@ -181,18 +222,20 @@ export function HostsTable() {
                 return (
                     <div className="flex items-center justify-center">
                         <Chip className="capitalize" color={statusColorMap[host.status]} size="sm" variant="flat">
-                            {cellValue instanceof Date ? cellValue.toString() : cellValue}
+                    {typeof cellValue === 'string' ? cellValue : 'Unknown'}
                         </Chip>
                     </div>
                 );
             case "actions":
                 return (
                     <div className="relative flex items-center justify-center gap-2 h-full ">
-                        <Tooltip color="primary" content="View Host">
-                            <span className="text-lg text-primary cursor-pointer active:opacity-50">
-                                <EyeIcon width={25} height={25}/>
-                            </span>
-                        </Tooltip>
+                        <Link href={`/${host.hostname}`}>
+                            <Tooltip color="primary" content="View Host">
+                                <span className="text-lg text-primary cursor-pointer active:opacity-50">
+                                    <EyeIcon width={25} height={25}/>
+                                </span>
+                            </Tooltip>
+                        </Link>
                         <Tooltip content="Brief Description">
                             <span className="text-lg text-warning cursor-pointer active:opacity-50">
                                 <InformationCircleIcon width={25} height={25}/>
@@ -205,10 +248,10 @@ export function HostsTable() {
                         </Tooltip>
                     </div>  
                 );
-            default:
-                return cellValue !== undefined ? cellValue.toString() : '';
+            // default:
+            //     return cellValue !== undefined ? cellValue.toString() : '';
         }
-    }, [open]);
+    }, []);
 
     const onNextPage = React.useCallback(() => {
         if (page < pages) {
@@ -240,25 +283,32 @@ export function HostsTable() {
         setFilterValue("")
         setPage(1)
     }, [])
+
+    // state handlers used to disable/enable the scan button
     const [scanning, setScanning] = React.useState(false);
     const [updatingDB, setUpdating] = React.useState(false);
 
     const topContent = React.useMemo(() => {
-        
+
+        // function to add all enumerated hosts to db
+        // created so I can determine when all hosts have been added to the db
+        // then I can render my toast for the user
+
         async function addHostsToDB (newHosts: Host[]) {
     
             for (const newHost of newHosts) {
                 
+                // create hostname if nmap scan didn't grab it
+                // should be host-(last octet of ip)
                 if (!newHost.hostname) {
                     const ipParts = newHost.ip.split('.');
                     const lastOctet = ipParts[ipParts.length - 1];
                     newHost.hostname = `host-${lastOctet}`;
-                    console.log(newHost)
+                    // console.log(newHost)
                 }
 
                 await addHostToDB(newHost);
             };
-
         }
 
         const handleScan = async () => {
@@ -268,7 +318,7 @@ export function HostsTable() {
 
                 // Wait for the scan results promise to resolve
                 const scanResults: any = await toast.promise(
-                    fetchScanResults('192.168.30.0/24'),
+                    fetchScanResults('192.168.60.0/24'),
                     {
                         loading: 'Scanning...',
                         success: 'Scan Complete!',
@@ -276,16 +326,14 @@ export function HostsTable() {
                     }
                 );
 
-                setScanning(false);
-
                 if (scanResults.error) {
-                    console.log('No you suck i am here')
+                    // console.log('No you suck i am here')
                     toast.error(`Scan operation failed unexpectedly: ${scanResults.error}`);
                     setUpdating(false);
                     return;
                 }
 
-                console.log('Scan bitch',scanResults)
+                // console.log('Scan...',scanResults)
 
                 // Now that scanResults is available, proceed to update the database
                 await toast.promise(
@@ -298,9 +346,14 @@ export function HostsTable() {
                 );
 
                 // make component refetch table data once all actions are completed
-                fetchHosts();
-                console.log('tried to fetch')
-
+                // await fetchHosts();
+                // console.log('tried to fetch')
+                // revalidateTag 
+                // console.log('revalidating tag');
+                // revalidate();
+                // console.log('refetching');
+                // setRefetchCounter();
+                // console.log('incremented refetch counter: ', refetchCounter);
 
             } catch (error) {
                 toast.error(`Scan operation failed unexpectedly: ${error}`);
@@ -308,8 +361,9 @@ export function HostsTable() {
                 // Ensure that states are set correctly in case of success or failure
                 setScanning(false);
                 setUpdating(false);
+
             }
-        };
+        }; 
 
 
         return (
@@ -367,6 +421,9 @@ export function HostsTable() {
                                 ))}
                             </DropdownMenu>
                         </Dropdown>
+                        <Button className={`dark:bg-[#2B3242] hover:bg-[#27272A]`} onClick={() => {setRefetchCounter()}}>
+                            Revalidate
+                        </Button>
                         <Button className={`dark:bg-[#2B3242] ${scanning || updatingDB ? '' : 'dark:hover:bg-[#27272A]'}`} onClick={handleScan} disabled={scanning || updatingDB}>
                             Scan Hosts
                         </Button>
@@ -399,7 +456,7 @@ export function HostsTable() {
         scanning,
         updatingDB,
         setRefetchCounter,
-        refetchCounter
+        
     ]);
 
     const bottomContent = React.useMemo(() => {
